@@ -235,27 +235,27 @@ spec:
               value: unix:///var/lib/csi/sockets/pluginproxy/csi.sock
             - name: MASTER_HOST
               valueFrom:
-                configMapKeyRef:
+                secretRef:
                   name: csi-moosefs-config
                   key: master_host
             - name: MASTER_PORT
               valueFrom:
-                configMapKeyRef:
+                secretRef:
                   name: csi-moosefs-config
                   key: master_port
             - name: ROOT_DIR
               valueFrom:
-                configMapKeyRef:
+                secretRef:
                   name: csi-moosefs-config
                   key: k8s_root_dir
             - name: WORKING_DIR
               valueFrom:
-                configMapKeyRef:
+                secretRef:
                   name: csi-moosefs-config
                   key: driver_working_dir
             - name: MFS_LOGGING
               valueFrom:
-                configMapKeyRef:
+                secretRef:
                   name: csi-moosefs-config
                   key: mfs_logging
           imagePullPolicy: "Always"
