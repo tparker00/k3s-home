@@ -1,6 +1,9 @@
 ---
 k3s_control_node: true
 k3s_server:
+  #% if bootstrap_datastore_endpoint|default(false) %#
+  datastore-endpoint: "#{ bootstrap_datastore_endpoint }#"
+  #% endif %#
   #% if bootstrap_advanced_flags.dual_stack_ipv4_first|default(false) %#
   cluster-cidr: "#{ bootstrap_cluster_cidr.split(',')[0] }#,#{ bootstrap_cluster_cidr.split(',')[1] }#"
   service-cidr: "#{ bootstrap_service_cidr.split(',')[0] }#,#{ bootstrap_service_cidr.split(',')[1] }#"
