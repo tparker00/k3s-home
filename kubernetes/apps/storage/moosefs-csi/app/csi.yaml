@@ -329,12 +329,12 @@ spec:
               value: unix:///csi/csi.sock
             - name: MASTER_HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: master_host
             - name: MASTER_PORT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: master_port
             - name: NODE_ID
@@ -343,22 +343,22 @@ spec:
                   fieldPath: spec.nodeName
             - name: ROOT_DIR
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: k8s_root_dir
             - name: WORKING_DIR
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: driver_working_dir
             - name: MOUNT_COUNT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: mount_count
             - name: MFS_LOGGING
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: csi-moosefs-config
                   key: mfs_logging
           imagePullPolicy: "Always"
