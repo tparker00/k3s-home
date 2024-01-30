@@ -27,8 +27,6 @@ spec:
   values:
     controllers:
       main:
-        labels:
-          nfsMount: "true"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -131,8 +129,6 @@ spec:
     persistence:
       data:
         enabled: true
-        type: nfs
-        server: ${NAS_IP:=temp}
-        path: ${SECRET_NFS_MINIO:=temp}
+        path: ${SECRET_MFS_MINIO:=temp}
         globalMounts:
           - path: /data

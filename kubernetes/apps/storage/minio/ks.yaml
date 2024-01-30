@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-bitwarden
-  path: ./kubernetes/teyvat/apps/storage/minio/app
+  path: ./kubernetes/apps/storage/minio/app
   prune: true
   sourceRef:
     kind: GitRepository
