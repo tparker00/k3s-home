@@ -129,7 +129,7 @@ spec:
     persistence:
       data:
         enabled: true
-        accessMode: "${MFS_ACCESSMODES:-ReadWriteOnce}"
+        type: hostPath
         path: ${SECRET_MFS_MINIO:=temp}
         globalMounts:
           - path: /data
