@@ -130,6 +130,6 @@ spec:
       data:
         enabled: true
         type: hostPath
-        path: ${SECRET_MFS_MINIO:=temp}
+        hostPath: ${SECRET_MFS_MINIO:=temp}
         globalMounts:
           - path: /data
