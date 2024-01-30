@@ -9,15 +9,15 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-16
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 20Gi
-    storageClass: moosefs-storage
+    size: 15Gi
+    storageClass: local-hostpath
   superuserSecret:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
   postgresql:
     parameters:
       max_connections: "600"
-      max_slot_wal_keep_size: 10GB
+      max_slot_wal_keep_size: 5GB
       shared_buffers: 512MB
   resources:
     requests:
@@ -32,7 +32,7 @@ spec:
       - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
       - { regex: cluster, action: labeldrop }
   backup:
-    retentionPolicy: 30d
+    retentionPolicy: 60d
     barmanObjectStore: &barmanObjectStore
       data:
         compression: bzip2

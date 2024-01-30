@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./moosefs-csi/ks.yaml
   - ./minio/ks.yaml
+  - ./local-path-provisioner/ks.yaml
