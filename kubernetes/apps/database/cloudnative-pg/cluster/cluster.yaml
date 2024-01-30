@@ -5,7 +5,7 @@ kind: Cluster
 metadata:
   name: postgres
 spec:
-  instances: 4
+  instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-16
   primaryUpdateStrategy: unsupervised
   storage:
@@ -53,11 +53,11 @@ spec:
           key: aws-secret-access-key
   # # Note: previousCluster needs to be set to the name of the previous
   # # cluster when recovering from an existing cnpg cluster
-  bootstrap:
-    recovery:
-      source: &previousCluster postgres-v3
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        <<: *barmanObjectStore
-        serverName: *previousCluster
+#  bootstrap:
+#    recovery:
+#      source: &previousCluster postgres-v3
+#  externalClusters:
+#    - name: *previousCluster
+#      barmanObjectStore:
+#        <<: *barmanObjectStore
+#        serverName: *previousCluster
