@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app homarr
+  name: &app homepage
 spec:
   interval: 30m
   chart:
@@ -27,47 +27,31 @@ spec:
   values:
     controllers:
       main:
+        replicas: 2
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
-              repository: ghcr.io/ajnart/homarr
-              tag: "0.14.4"
+              repository: ghcr.io/gethomepage/homepage
+              tag: v0.8.7
             env:
               TZ: ${TIMEZONE}
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /ping
-                    port: &port 7575
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-              startup:
-                enabled: false
+            envFrom:
+              - secretRef:
+                  name: homepage-secret
             resources:
               requests:
-                cpu: 10m
-                memory: 256M
+                cpu: 15m
+                memory: 200M
               limits:
-                memory: 1Gi
-        pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
+                memory: 2G
     service:
       main:
         ports:
           http:
-            port: *port
+            port: 3000
     ingress:
       main:
         enabled: true
@@ -76,6 +60,7 @@ spec:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
                 service:
                   name: main
                   port: http
@@ -85,16 +70,20 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: homarr-configs
+        type: configMap
+        name: homepage-config
         globalMounts:
-          - path: /app/data/configs
-      data:
-        enabled: true
-        existingClaim: homarr-data
-        globalMounts:
-          - path: /data
-      icons:
-        enabled: true
-        existingClaim: homarr-icons
-        globalMounts:
-          - path: /app/public/icons
+          - subPath: bookmarks.yaml
+            path: /app/config/bookmarks.yaml
+          - subPath: docker.yaml
+            path: /app/config/docker.yaml
+          - subPath: kubernetes.yaml
+            path: /app/config/kubernetes.yaml
+          - subPath: services.yaml
+            path: /app/config/services.yaml
+          - subPath: settings.yaml
+            path: /app/config/settings.yaml
+          - subPath: widgets.yaml
+            path: /app/config/widgets.yaml
+    serviceAccount:
+      create: true
