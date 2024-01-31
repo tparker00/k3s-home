@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app sabnzbd
+  name: &app mylar
 spec:
   interval: 30m
   chart:
@@ -32,61 +32,40 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/sabnzbd
-              tag: "4.2.1"
+              repository: ghcr.io/linuxserver/mylar3
+              tag: version-v0.7.6@sha256:0dbc84954e0b3d13cf42f5b1f42e845cb0d211d9d627642e5b9101a49cb6c0b0
             env:
               TZ: ${TIMEZONE}
-              SABNZBD__PORT: &port 8080
-              SABNZBD__HOST_WHITELIST_ENTRIES: >-
-                sabnzbd,
-                sabnzbd.downloads,
-                sabnzbd.downloads.svc,
-                sabnzbd.downloads.svc.cluster,
-                sabnzbd.downloads.svc.cluster.local,
-                sabnzbd.${SECRET_DOMAIN}
-            envFrom:
-              - secretRef:
-                  name: sabnzbd-secret
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api?mode=version
-                    port: *port
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-              startup:
-                enabled: false
+              UID: 1000
+              GID: 1000
             resources:
               requests:
-                cpu: 10m
-                memory: 100Mi
+                cpu: 15m
+                memory: 700M
               limits:
-                memory: 12Gi
-        pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
+                memory: 1200M
     service:
       main:
         ports:
           http:
-            port: *port
+            port: 8090
     ingress:
       main:
         enabled: true
         className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Mylar
+          gethomepage.dev/icon: mylar.png
+          gethomepage.dev/widget.type: mylar
+          gethomepage.dev/widget.url: http://mylar.downloads:8090
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_MYLAR_TOKEN}}"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
                 service:
                   name: main
                   port: http
@@ -97,11 +76,15 @@ spec:
       config:
         enabled: true
         existingClaim: *app
+      comics:
+        enabled: true
+        type: hostPath
+        hostPath: ${SECRET_MFS_COMICS:=temp}
+        globalMounts:
+          - path: /data
       downloads:
         enabled: true
         type: hostPath
-        hostPath: ${SECRET_MFS_DOWNLOADS:=temp}
+        hostPath: ${SECRET_MFS_DOWNLOADS:=temp2}
         globalMounts:
           - path: /downloads
-      incomplete:
-        type: emptyDir
