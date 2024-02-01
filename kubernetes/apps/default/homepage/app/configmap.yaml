@@ -33,7 +33,7 @@ data:
               href: 'https://kubesearch.dev/'
         - k3s-home-cluster:
             - icon: github.png
-              href: 'https://github.com/tomparker00/k3s-home'
+              href: 'https://github.com/tparker00/k3s-home'
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
