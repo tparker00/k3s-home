@@ -75,7 +75,7 @@ spec:
       media:
         enabled: true
         type: hostPath
-        path: ${SECRET_MFS_DATA:=temp}
+        hostPath: ${SECRET_MFS_DATA:=temp}
         globalMounts:
           - path: /data
             subPath: books
