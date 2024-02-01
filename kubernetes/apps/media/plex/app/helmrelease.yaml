@@ -58,9 +58,10 @@ spec:
           securityContext:
             runAsUser: 568
             runAsGroup: 568
+            runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [105]
+            supplementalGroups: [44, 105, 10000]
     service:
       main:
         type: LoadBalancer
