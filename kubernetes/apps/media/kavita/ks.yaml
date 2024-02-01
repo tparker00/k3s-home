@@ -22,5 +22,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 2Gi
+      MFS_CAPACITY: 2Gi
       GATUS_SUBDOMAIN: comics
