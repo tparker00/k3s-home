@@ -8,7 +8,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./k3s-cluster/apps/default/teslamate/app
+  path: ./k3s-cluster/apps/teslamate/teslamate/app
   prune: true
   sourceRef:
     kind: GitRepository
