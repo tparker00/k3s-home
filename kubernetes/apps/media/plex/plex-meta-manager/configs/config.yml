@@ -1,14 +1,13 @@
 ---
 libraries:
   Movies:
-    metadata_path:
-      - file: config/Pre-rolls.yml #Mounted by Kustomization
+    collections_files:
       - repo: Movies.yml
       - repo: Movies - Holidays by Drazzizzi.yml
       - repo: Movies - Trakt (Unplayed) by Magic815.yml
       - pmm: basic
       - pmm: imdb
-    overlay_path:
+    overlay_files:
       - remove_overlays: false
       - repo: Movies - Overlays - Charts.yml
       - repo: Movies - Overlays - Oscars.yml
@@ -24,11 +23,11 @@ libraries:
       mass_user_rating_update: imdb
 
   TV Shows:
-    metadata_path:
+    metadata_files:
       - repo: TV Shows.yml
       - pmm: basic
       - pmm: imdb
-    overlay_path:
+    overlay_files:
       - remove_overlays: false
       - repo: TV Shows - Overlays - Charts.yml
       - repo: TV Shows - Overlays - Networks.yml
