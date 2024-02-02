@@ -45,5 +45,6 @@ spec:
           restartPolicy: OnFailure
           volumes:
             - name: nas-backups
-              mfs:
+              hostPath:
                 path: ${SECRET_MFS_POSTGRES:=temp}
+                type: Directory
