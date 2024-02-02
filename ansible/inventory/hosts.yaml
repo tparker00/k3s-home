@@ -17,3 +17,6 @@ kubernetes:
         "worker01":
           ansible_user: "aero"
           ansible_host: "10.10.5.63"
+        "worker02":
+          ansible_user: "aero"
+          ansible_host: "10.10.5.64"
