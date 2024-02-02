@@ -173,7 +173,7 @@ spec:
             uid: prometheus
             isDefault: true
             access: proxy
-            url: http://thanos-svc.observability.svc.cluster.local:9090
+            url: http://thanos-svc.${SECRET_DOMAIN}:9090
             jsonData:
               prometheusType: Thanos
           - name: Loki
