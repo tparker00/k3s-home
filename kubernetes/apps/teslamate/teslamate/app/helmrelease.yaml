@@ -36,7 +36,7 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: teslamate-secret
         containers:
@@ -45,11 +45,9 @@ spec:
               repository: teslamate/teslamate
               tag: 1.28.2
             env:
-              TZ: "${TZ}"
+              TZ: "${TIMEZONE}"
               DISABLE_MQTT: "true"
-            envFrom:
-              - secretRef:
-                  name: teslamate-secret
+            envFrom: *envFrom
             resources:
               requests:
                 memory: 250Mi
@@ -61,7 +59,7 @@ spec:
         type: ClusterIP
         ports:
           http:
-            port: &port 4000
+            port: 4000
     ingress:
       main:
         enabled: true
