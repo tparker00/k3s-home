@@ -41,7 +41,7 @@ spec:
               tag: v1.3.2
             command:
             - /bin/sh
-            - args:
+            args:
             - -c
             - sed -i 's|/var/log/|/config/|g' /bin/backup && /bin/backup
             envFrom:
@@ -62,7 +62,7 @@ spec:
               tag: v1.3.2
             command:
             - /bin/sh
-            - args:
+            args:
             - -c
             - sed -i 's|/var/log/|/config/|g' /bin/check && /bin/check
             envFrom:
