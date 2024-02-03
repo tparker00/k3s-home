@@ -45,7 +45,7 @@ spec:
             - -c
             - sed -i 's|/var/log/|/config/|g' /bin/backup && /bin/backup
             env:
-              TZ: ${TZ}
+              TZ: ${TIMEZONE}
             envFrom:
               - secretRef:
                   name: *app
@@ -68,7 +68,7 @@ spec:
             - -c
             - sed -i 's|/var/log/|/config/|g' /bin/check && /bin/check
             env:
-              TZ: ${TZ}
+              TZ: ${TIMEZONE}
             envFrom:
               - secretRef:
                   name: *app

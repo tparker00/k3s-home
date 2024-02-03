@@ -36,7 +36,7 @@ spec:
               tag: v0.24.3
               pullPolicy: IfNotPresent
             env:
-              TZ: ${TZ}
+              TZ: ${TIMEZONE}
               STASH_STASH: /data
               STASH_CACHE: /root/.stash/cache
             resources:
