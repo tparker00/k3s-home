@@ -72,7 +72,7 @@ spec:
       main:
         enabled: false
     persistence:
-      logs:
+      config:
         enabled: true
         existingClaim: *app
       data:
