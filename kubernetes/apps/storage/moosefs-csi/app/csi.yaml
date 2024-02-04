@@ -287,7 +287,7 @@ spec:
       containers:
         # registrar
         - name: driver-registrar
-          image: quay.io/k8scsi/csi-node-driver-registrar:v1.1.0
+          image: quay.io/k8scsi/csi-node-driver-registrar:v1.3.0
           args:
             - "--v=5"
             - "--csi-address=$(ADDRESS)"
