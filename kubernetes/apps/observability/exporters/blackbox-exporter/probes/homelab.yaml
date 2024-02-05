@@ -12,3 +12,4 @@ spec:
       static:
         - ${ROUTER_IP}
         - ${NAS_IP}
+        - ${NAS2_IP}
