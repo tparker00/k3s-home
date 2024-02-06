@@ -17,7 +17,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: tdarr
+                name: moosefs
                 port:
                   number: 9425
   tls:
