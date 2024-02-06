@@ -1,0 +1,47 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name moosefs
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Moosefs
+    gethomepage.dev/widget.url: http://${NAS_IP}:9425
+spec:
+  ingressClassName: internal
+  rules:
+    - host: &host moosefs.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: tdarr
+                port:
+                  number: 9425
+  tls:
+    - hosts:
+        - *host
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: *name
+subsets:
+  - addresses:
+      - ip: ${NAS_IP}
+    ports:
+      - name: http
+        port: 9425
+        protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: *name
+spec:
+  ports:
+    - name: http
+      port: 9425
+  type: ClusterIP
