@@ -32,7 +32,7 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: 0 */6 * * *
-          successfulJobsHistory: 2
+          successfulJobsHistory: 4
         containers:
           main:
             nameOverride: backup
@@ -55,7 +55,7 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: 0 23 * * 3
-          successfulJobsHistory: 2
+          successfulJobsHistory: 4
         containers:
           main:
             nameOverride: check
