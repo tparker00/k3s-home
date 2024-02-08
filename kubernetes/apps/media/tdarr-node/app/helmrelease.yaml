@@ -76,8 +76,7 @@ spec:
         type: hostPath
         hostPath: ${SECRET_MFS_DATA:=temp}
         globalMounts:
-          - path /mnt/moosefs
-        readOnly: false
+          - path: /mnt/moosefs
       cache:
         enabled: true
         type: local-hostpath
