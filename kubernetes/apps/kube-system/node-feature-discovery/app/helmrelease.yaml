@@ -33,6 +33,8 @@ spec:
           usb:
             deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
             deviceLabelFields: ["class", "vendor", "device"]
+          pci:
+            deviceClassWhitelist: ["0300"]
           custom:
             - name: "intel-gpu"
               matchOn:
