@@ -87,5 +87,3 @@ spec:
         storageClass: local-hostpath
         size: 50Gi
         accessMode: ReadWriteOnce
-        globalMounts:
-          - path: /var/tmp
