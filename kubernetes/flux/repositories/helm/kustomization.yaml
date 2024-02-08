@@ -21,6 +21,7 @@ resources:
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./longhorn.yaml
+  - ./node-feature-discovery.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
