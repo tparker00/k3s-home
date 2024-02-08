@@ -15,6 +15,11 @@ spec:
         namespace: flux-system
   interval: 5m0s
   values:
+    tolerations:
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: "nfd-worker-conf"
@@ -23,27 +28,13 @@ spec:
           effect: NoSchedule
       config:
         core:
-          labelSources:
-            - custom
-            - pci
-            - usb
+          sources: ["custom", "pci", "usb"]
         sources:
           usb:
-            deviceClassWhitelist:
-              - "02"
-              - "03"
-              - "0e"
-              - "ef"
-              - "fe"
-              - "ff"
-            deviceLabelFields:
-              - class
-              - vendor
-              - device
+            deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
+            deviceLabelFields: ["class", "vendor", "device"]
           custom:
             - name: "intel-gpu"
-              labels:
-                - intel-gpu: "true"
               matchOn:
                 - pciId:
                     class: ["0300"]
