@@ -12,4 +12,5 @@ resources:
   - ./plex/ks.yaml
   - ./stash/ks.yaml
   - ./tautulli/ks.yaml
+  - ./tdarr-node/ks.yaml
   - ./wizarr/ks.yaml
