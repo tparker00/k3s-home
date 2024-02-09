@@ -15,8 +15,6 @@ spec:
         name: bjw-s
         namespace: flux-system
   dependsOn:
-    - name: local-path-provisioner
-      namespace: storage
     - name: node-feature-discovery
       namespace: kube-system
   maxHistory: 3
@@ -82,8 +80,3 @@ spec:
         hostPath: ${SECRET_MFS_DATA:=temp}
         globalMounts:
           - path: /mnt/moosefs
-      cache:
-        enabled: true
-        storageClass: local-hostpath
-        size: 50Gi
-        accessMode: ReadWriteOnce

@@ -6,11 +6,11 @@ metadata:
   name: &app tdarr-node
   namespace: flux-system
 spec:
-  targetNamespace: media
+  targetNamespace: downloads
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/media/tdarr-node/app
+  path: ./kubernetes/apps/downloads/tdarr-node/app
   prune: true
   sourceRef:
     kind: GitRepository
