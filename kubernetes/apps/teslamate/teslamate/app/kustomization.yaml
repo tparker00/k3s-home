@@ -6,3 +6,4 @@ namespace: teslamate
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - dashboards
