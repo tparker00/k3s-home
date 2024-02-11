@@ -32,8 +32,6 @@ spec:
     recreate: true
     cleanupOnFail: true
   values:
-    nodeSelector:
-      worker: yes
     config:
       lokiAddress: http://loki:3100/loki/api/v1/push
       snippets:
