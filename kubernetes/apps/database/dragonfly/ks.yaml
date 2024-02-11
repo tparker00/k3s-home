@@ -6,7 +6,7 @@ metadata:
   name: dbms-dragonfly
   namespace: flux-system
 spec:
-  path: ./kubernetes/main/apps/dbms/dragonfly/app
+  path: ./kubernetes/apps/database/dragonfly/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
