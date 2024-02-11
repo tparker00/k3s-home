@@ -9,7 +9,7 @@ spec:
   path: ./kubernetes/main/apps/dbms/dragonfly/app
   sourceRef:
     kind: GitRepository
-    name: homelab-kubernetes
+    name: home-kubernetes
   prune: true
   wait: true
   interval: 30m
