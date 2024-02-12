@@ -12,7 +12,7 @@ spec:
       version: 4.0.1
       sourceRef:
         kind: HelmRepository
-        name: fairwinds
+        name: fairwinds-charts
         namespace: flux-system
   maxHistory: 2
   install:
