@@ -16,6 +16,7 @@ resources:
   - ./dragonfly-charts.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
+  - ./fairwinds-charts.yaml
   - ./grafana.yaml
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
