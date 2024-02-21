@@ -12,6 +12,8 @@ data:
         group: guarded
         url: "https://${GATUS_SUBDOMAIN:-${APP}}.${GATUS_DOMAIN:-${SECRET_CLUSTER_DOMAIN}}${GATUS_PATH:-/}"
         interval: 1m
+        client:
+          dns-resolver: ${SECRET_CLUSTER_RESOLVER}
         ui:
           hide-hostname: true
           hide-url: true
