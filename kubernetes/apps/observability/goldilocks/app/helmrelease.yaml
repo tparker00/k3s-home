@@ -47,7 +47,7 @@ spec:
         ingressClassName: "internal"
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: mdi:align-vertical-top
+          gethomepage.dev/icon: etcd.png
           gethomepage.dev/name: Goldilocks
           gethomepage.dev/group: Observability
         hosts:
