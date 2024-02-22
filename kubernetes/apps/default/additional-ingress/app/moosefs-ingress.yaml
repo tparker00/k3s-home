@@ -6,6 +6,8 @@ metadata:
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Moosefs
+    gethomepage.dev/group: Storage
+    gethomepage.dev/icon: truenas.png
     gethomepage.dev/widget.url: http://${NAS_IP}:9425
 spec:
   ingressClassName: internal
