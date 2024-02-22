@@ -3,6 +3,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
 configMapGenerator:
+  - name: battery-health-lfp
+    files:
+      - battery-health-lfp.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/battery-health-lfp.json
   - name: battery-health
     files:
       - battery-health.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/battery-health.json
@@ -12,6 +15,9 @@ configMapGenerator:
   - name: charges
     files:
       - charges.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/charges.json
+  - name: charging-stats-lfp
+    files:
+      - charging-stats-lfp.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/charging-stats-lfp.json
   - name: charging-stats
     files:
       - charging-stats.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/charging-stats.json
@@ -30,6 +36,9 @@ configMapGenerator:
   - name: milage
     files:
       - milage.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/mileage.json
+  - name: overview-lfp
+    files:
+      - overview-lfp.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/overview-lfp.json
   - name: overview
     files:
       - overview.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/overview.json
@@ -57,6 +66,12 @@ configMapGenerator:
   - name: visited
     files:
       - visited.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/visited.json
+  - name: drive-details
+    files:
+      - drive-details.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/internal/drive-details.json
+  - name: charge-details
+    files:
+      - charge-details.json=https://raw.githubusercontent.com/teslamate-org/teslamate/master/grafana/dashboards/internal/charge-details.json
 
 generatorOptions:
   disableNameSuffixHash: true
