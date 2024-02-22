@@ -83,9 +83,6 @@ data:
       opacity: 50
     color: slate
     headerStyle: clean
-    quicklaunch:
-      hideInternetSearch: true
-      showSearchSuggestions: false
     layout:
       Calendar:
         style: column
@@ -113,7 +110,7 @@ data:
         icon: mdi-download-circle
   widgets.yaml: |
     - search:
-        provider: [kagi, google]
+        provider: [google]
         focus: false
         target: _blank
     - greeting:
