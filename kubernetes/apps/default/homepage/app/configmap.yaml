@@ -51,6 +51,19 @@ data:
                 - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr>
                   service_group: Downloads # group name where widget exists
                   service_name: Radarr # service name for that widget
+    - Media:
+        - Tdarr:
+            href: &url https://tdarr.${SECRET_DOMAIN}
+            icon: tdarr.png
+            description: Media Transcoding
+            widget:
+              type: tdarr
+              url: *url
+    - Storage:
+        - Moosefs:
+            href: &url https://moosefs.${SECRET_DOMAIN}
+            icon: unraid.png
+            description: Storage
     - Infrastructure:
         - Cloudflared:
             href: https://dash.cloudflare.com/
@@ -70,6 +83,9 @@ data:
       opacity: 50
     color: slate
     headerStyle: clean
+    quicklaunch:
+      hideInternetSearch: true
+      showSearchSuggestions: false
     layout:
       Calendar:
         style: column
