@@ -34,10 +34,6 @@ data:
         - k3s-home-cluster:
             - icon: github.png
               href: 'https://github.com/tparker00/k3s-home'
-    - Observability:
-        - goldilocks:
-          - icon: etcd.png
-            href: https://goldilocks.${SECRET_DOMAIN}
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
@@ -91,6 +87,14 @@ data:
           - icon: truenas.png
             description: Distributed storage
             href: http://moosefs.${SECRET_DOMAIN}
+        - synology
+          - icon: synology.png
+            description: Synology namespace:
+            href: http://synology.${SECRET_DOMAIN}
+    - Observability:
+        - goldilocks:
+          - icon: etcd.png
+            href: https://goldilocks.${SECRET_DOMAIN}
   settings.yaml: |
     title: Dashboard
     favicon: https://github.com/walkxcode/dashboard-icons/blob/main/png/heimdall.png
