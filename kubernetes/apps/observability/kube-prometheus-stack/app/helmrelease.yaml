@@ -108,6 +108,7 @@ spec:
           gethomepage.dev/icon: prometheus.png
           gethomepage.dev/name: Prometheus
           gethomepage.dev/group: Observability
+          gethomepage.dev/app: prometheus
           gethomepage.dev/widget.type: prometheus
           gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
         pathType: Prefix
