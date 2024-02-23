@@ -42,7 +42,7 @@ spec:
         storage: prometheus
         prometheus-address: |-
            http://thanos-query.observability.svc.cluster.local:9090
-
+        prometheus-cadvisor-job-name: kublet
     updater:
       enabled: false
     admissionController:
