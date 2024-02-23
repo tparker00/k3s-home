@@ -80,7 +80,7 @@ data:
             description: Firewall
             widget:
               type: opnsense
-              url: https://opnsense.${SECRET_DOMAIN}
+              url: https://opnsense.${SECRET_DOMAIN2}
               username: {{HOMEPAGE_VAR_OPNSENSE_USER}}
               password: {{HOMEPAGE_VAR_OPNSENSE_PASS}}
     - Media:
