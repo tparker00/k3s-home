@@ -89,7 +89,7 @@ data:
             href: http://moosefs.${SECRET_DOMAIN}
         - synology
           - icon: synology.png
-            description: Synology namespace:
+            description: Synology
             href: http://synology.${SECRET_DOMAIN}
     - Observability:
         - goldilocks:
