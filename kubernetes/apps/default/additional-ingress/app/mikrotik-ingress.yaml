@@ -1,0 +1,43 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mikrotik
+spec:
+  ingressClassName: internal
+  rules:
+    - host: &host mikrotik.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: mikrotik
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - *host
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: mikrotik
+subsets:
+  - addresses:
+      - ip: ${MIKROTIK_IP}
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mikrotik
+spec:
+  ports:
+    - name: http
+      port: 80
+  type: ClusterIP

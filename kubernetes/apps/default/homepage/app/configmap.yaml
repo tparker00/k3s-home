@@ -34,10 +34,6 @@ data:
         - k3s-home-cluster:
             - icon: github.png
               href: 'https://github.com/tparker00/k3s-home'
-    - Storage:
-        - moosefs:
-          - icon: truenas.png
-            href: http://moosefs.${SECRET_DOMAIN}
     - Observability:
         - goldilocks:
           - icon: etcd.png
@@ -69,6 +65,24 @@ data:
               accountid: {{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}
               key: {{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}
+        - Mikrotik:
+            href: http://mikrotik.${SECRET_DOMAIN}
+            icon: mikrotik.png
+            description: Data switch
+            widget:
+              type: mikrotik
+              url: 192.168.1.3
+              username: {{HOMEPAGE_VAR_MIKROTIK_USER}}
+              password: {{HOMEPAGE_VAR_MIKROTIK_PASS}}
+        - OPNSense:
+            href: https://opnsense.${SECRET_DOMAIN}
+            icon: opnsense.png
+            description: Firewall
+            widget:
+              type: opnsense
+              url: https://opnsense.${SECRET_DOMAIN}
+              username: {{HOMEPAGE_VAR_OPNSENSE_USER}}
+              password: {{HOMEPAGE_VAR_OPNSENSE_PASS}}
     - Media:
         - Tdarr:
             href: &url https://tdarr.${SECRET_DOMAIN}
@@ -77,13 +91,15 @@ data:
             widget:
               type: tdarr
               url: *url
+    - Storage:
+        - moosefs:
+          - icon: truenas.png
+            description: Distributed storage
+            href: http://moosefs.${SECRET_DOMAIN}
   settings.yaml: |
     title: Dashboard
     favicon: https://github.com/walkxcode/dashboard-icons/blob/main/png/heimdall.png
     theme: dark
-    background:
-      image: https://raw.githubusercontent.com/smbonn2005/homeops/main/icons/moon.jpg
-      opacity: 50
     color: slate
     headerStyle: clean
     layout:
