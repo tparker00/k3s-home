@@ -110,7 +110,7 @@ spec:
           gethomepage.dev/group: Observability
           gethomepage.dev/app: prometheus
           gethomepage.dev/widget.type: prometheus
-          gethomepage.dev/widget.url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+          gethomepage.dev/widget.url: http://thanos-query-frontend.observability.svc.cluster.local:9090
         pathType: Prefix
         hosts:
           - &host prometheus.${SECRET_DOMAIN}
