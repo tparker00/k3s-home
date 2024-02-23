@@ -3,12 +3,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: moosefs
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Moosefs
-    gethomepage.dev/group: Storage
-    gethomepage.dev/icon: truenas.png
-    gethomepage.dev/widget.url: http://${NAS_IP}:9425
 spec:
   ingressClassName: internal
   rules:

@@ -34,6 +34,10 @@ data:
         - k3s-home-cluster:
             - icon: github.png
               href: 'https://github.com/tparker00/k3s-home'
+    - Storage:
+        - moosefs:
+          - icon: truenas.png
+            href: http://moosefs.${SECRET_DOMAIN}
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
