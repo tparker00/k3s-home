@@ -87,7 +87,7 @@ data:
           - icon: truenas.png
             description: Distributed storage
             href: http://moosefs.${SECRET_DOMAIN}
-        - synology
+        - synology:
           - icon: synology.png
             description: Synology
             href: http://synology.${SECRET_DOMAIN}
