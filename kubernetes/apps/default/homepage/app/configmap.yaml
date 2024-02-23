@@ -69,6 +69,14 @@ data:
               accountid: {{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}
               key: {{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}
+    - Media:
+        - Tdarr:
+            href: &url https://tdarr.${SECRET_DOMAIN}
+            icon: tdarr.png
+            description: Media Transcoding
+            widget:
+              type: tdarr
+              url: *url
   settings.yaml: |
     title: Dashboard
     favicon: https://github.com/walkxcode/dashboard-icons/blob/main/png/heimdall.png
