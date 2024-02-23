@@ -49,6 +49,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: etcd.png
           gethomepage.dev/name: Goldilocks
+          gethomepage.dev/app: goldilocks
           gethomepage.dev/group: Observability
           gethomepage.dev/widget.url: https://goldilocks.${SECRET_DOMAIN}
         hosts:
