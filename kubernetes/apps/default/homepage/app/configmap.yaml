@@ -38,6 +38,10 @@ data:
         - moosefs:
           - icon: truenas.png
             href: http://moosefs.${SECRET_DOMAIN}
+    - Observability:
+        - goldilocks:
+          - icon: etcd.png
+            href: https://goldilocks.${SECRET_DOMAIN}
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
