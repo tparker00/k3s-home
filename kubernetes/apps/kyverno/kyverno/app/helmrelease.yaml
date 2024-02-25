@@ -15,16 +15,22 @@ spec:
         name: kyverno-charts
         namespace: flux-system
       interval: 15m
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
       retries: 5
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 5
   values:
     crds:
       install: true
+    grafana:
+      enabled: true
+      annotations:
+        grafana_folder: System
     config:
       excludeKyvernoNamespace: false
     admissionController:
@@ -47,6 +53,8 @@ spec:
       serviceMonitor:
         enabled: true
     backgroundController:
+      serviceMonitor:
+        enabled: true
       rbac:
         clusterRole:
           extraResources:
@@ -62,3 +70,9 @@ spec:
                 - delete
                 - get
                 - list
+    cleanupController:
+      serviceMonitor:
+        enabled: true
+    reportsController:
+      serviceMonitor:
+        enabled: true
