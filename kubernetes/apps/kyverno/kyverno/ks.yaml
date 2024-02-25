@@ -14,4 +14,4 @@ spec:
   prune: true
   wait: true
   dependsOn:
-    - name: monitoring-system-kube-prometheus-stack
+    - name: observability-kube-prometheus-stack
