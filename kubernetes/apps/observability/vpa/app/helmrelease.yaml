@@ -42,8 +42,6 @@ spec:
         storage: prometheus
         prometheus-address: |-
            http://thanos-query.observability.svc.cluster.local:9090
-        prometheus-cadvisor-job-name: kubelet
-        container-pod-name-label: pod
     updater:
       enabled: false
     admissionController:
