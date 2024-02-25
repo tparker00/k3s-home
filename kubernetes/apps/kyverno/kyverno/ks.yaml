@@ -9,7 +9,7 @@ spec:
   path: ./kubernetes/apps/kyverno/kyverno/app
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: home-kubernetes
   interval: 30m
   prune: true
   wait: true
