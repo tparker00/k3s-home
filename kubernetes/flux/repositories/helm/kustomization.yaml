@@ -21,6 +21,7 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
+  - ./kyverno.yaml
   - ./node-feature-discovery.yaml
   - ./metrics-server.yaml
   - ./postfinance.yaml
