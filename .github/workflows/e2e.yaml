@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "e2e"
 
 on:
@@ -77,9 +78,9 @@ jobs:
         shell: bash
         run: |
           task init
-          cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./bootstrap/vars/config.yaml
+          cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./config.yaml
           export BOOTSTRAP_AGE_PUBLIC_KEY=$(sed -n 's/# public key: //gp' age.key)
-          envsubst < ./bootstrap/vars/config.yaml | sponge ./bootstrap/vars/config.yaml
+          envsubst < ./config.yaml | sponge ./config.yaml
 
       - name: Run configure task
         shell: bash
