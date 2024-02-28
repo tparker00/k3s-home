@@ -61,8 +61,8 @@ spec:
           main:
             image:
               # TODO: move to semver once available
-              repository: ghcr.io/buroa/gatus
-              tag: develop@sha256:8529a132a9063f0e4c038147e48acc26648c3ad2d1e32d97be0e04b3063d6abf
+              repository: twinproduction/gatus
+              tag: latest@sha256:9494a0ab312eeaf04ce69b9d46dc9cf447f582d54a8e8f7b930d29a94bee1d90
             env:
               TZ: ${TIMEZONE}
               GATUS_CONFIG_PATH: /config
