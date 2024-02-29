@@ -56,8 +56,8 @@ tasks:
           - FiloSottile/age?as=age&type=script
           - fluxcd/flux2?as=flux&type=script
           - getsops/sops?as=sops&type=script
+          - helmfile/helmfile?as=helmfile&type=script
           - jqlang/jq?as=jq&type=script
-          - k0sproject/k0sctl?as=k0sctl&type=script
           - kubernetes-sigs/kustomize?as=kustomize&type=script
           - siderolabs/talos?as=talosctl&type=script
           - yannh/kubeconform?as=kubeconform&type=script
