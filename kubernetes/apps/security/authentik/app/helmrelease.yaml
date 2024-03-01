@@ -34,6 +34,9 @@ spec:
         type: RollingUpdate
       autoscaling:
         enabled: true
+      metrics:
+        serviceMonitor:
+          enabled: true
       ingress:
         enabled: true
         ingressClassName: external
@@ -68,9 +71,7 @@ spec:
       enabled: false
     prometheus:
       rules:
-        create: true
-      serviceMonitor:
-        create: true
+        enabled: true
     authentik:
       email:
         from: id@${SECRET_DOMAIN}
