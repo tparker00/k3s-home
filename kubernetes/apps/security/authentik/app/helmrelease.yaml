@@ -26,9 +26,6 @@ spec:
         envFrom:
           - secretRef:
               name: authentik-secrets
-    server:
-      podAnnotations:
-        secret.reloader.stakater.com/reload: authentik-secrets
     autoscaling:
       server:
         enabled: true
