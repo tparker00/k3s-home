@@ -19,14 +19,14 @@ spec:
     - name: authentik-redis
       namespace: security
   values:
-    initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-init:16
-        imagePullPolicy: IfNotPresent
     server:
+      initContainers:
+        init-db:
+          image: ghcr.io/onedr0p/postgres-init:16
+          imagePullPolicy: IfNotPresent
+    global:
       podAnnotations:
         secret.reloader.stakater.com/reload: authentik-secrets
-    global:
       envFrom:
         - secretRef:
             name: authentik-secrets
