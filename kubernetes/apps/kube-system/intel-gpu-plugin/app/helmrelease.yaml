@@ -42,7 +42,7 @@ spec:
             # Refer to the [plugin documentation](https://github.com/intel/intel-device-plugins-for-kubernetes/blob/main/cmd/gpu_plugin/README.md) for more information.
             args:
               - -shared-dev-num
-              - "1"
+              - "3"
     defaultPodOptions:
       affinity:
         nodeAffinity:
