@@ -25,7 +25,7 @@ data:
             - icon: spotify.png
               href: 'http://open.spotify.com'
         - Youtube Music:
-            - icon: https://raw.githubusercontent.com/LilDrunkenSmurf/k3s-home-cluster/main/icons/youtube-music.png
+            - icon: https://raw.githubusercontent.com/joryirving/k3s-home-cluster/main/icons/youtube-music.png
               href: 'https://music.youtube.com'
     - Git:
         - kubesearch:
