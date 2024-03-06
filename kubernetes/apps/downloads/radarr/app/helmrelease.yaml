@@ -29,8 +29,6 @@ spec:
       main:
         annotations:
           reloader.stakater.com/auto: "true"
-          prometheus.io/scrape: "true"
-          prometheus.io/port: "monitoring"
         initContainers:
           init-db:
             image:
@@ -98,6 +96,9 @@ spec:
           http:
             port: *port
       secondary:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "monitoring"
         nameOverride: metrics
         controller: main
         ports:
