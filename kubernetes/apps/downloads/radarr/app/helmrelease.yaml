@@ -96,14 +96,20 @@ spec:
           http:
             port: *port
       secondary:
-        annotations:
-          prometheus.io/scrape: "true"
-          prometheus.io/port: "monitoring"
         nameOverride: metrics
         controller: main
         ports:
           metrics:
             port: *metricsPort
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: *metricsPort
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       main:
         enabled: true
