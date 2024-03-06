@@ -29,6 +29,8 @@ spec:
       main:
         annotations:
           reloader.stakater.com/auto: "true"
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "monitoring"
         initContainers:
           init-db:
             image:
@@ -73,9 +75,6 @@ spec:
               limits:
                 memory: 1Gi
           secondary:
-            annotations:
-              prometheus.io/scrape: "true"
-              prometheus.io/port: "monitoring"
             image:
               repository: ghcr.io/onedr0p/exportarr
               tag: v2.0.0
