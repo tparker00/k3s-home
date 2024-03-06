@@ -80,10 +80,8 @@ spec:
             env:
               - name: PORT
                 value: &metricsPort 9794
-              - name: URL
-                value: "http://radarr.hamcloud.io"
             envFrom: *envFrom
-            args: ["radarr"]
+            args: ["radarr", ]
         pod:
           securityContext:
             runAsUser: 568
