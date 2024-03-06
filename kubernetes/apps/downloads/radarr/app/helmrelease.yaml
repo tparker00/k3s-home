@@ -73,6 +73,9 @@ spec:
               limits:
                 memory: 1Gi
           secondary:
+            annotations:
+              prometheus.io/scrape: "true"
+              prometheus.io/port: "monitoring"
             image:
               repository: ghcr.io/onedr0p/exportarr
               tag: v2.0.0
@@ -95,6 +98,12 @@ spec:
         ports:
           http:
             port: *port
+      secondary:
+        nameOverride: metrics
+        controller: main
+        ports:
+          metrics:
+            port: *metricsPort
     ingress:
       main:
         enabled: true
