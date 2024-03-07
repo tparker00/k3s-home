@@ -102,14 +102,14 @@ spec:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      main:
+      secondary:
         enabled: true
         endpoints:
           - port: metrics
             scheme: http
             path: /metrics
-            interval: 10m
-            scrapeTimeout: 2m
+            interval: 1m
+            scrapeTimeout: 20s
     ingress:
       main:
         enabled: true
