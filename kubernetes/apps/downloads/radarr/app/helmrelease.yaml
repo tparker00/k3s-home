@@ -108,6 +108,7 @@ spec:
             path: /metrics
             interval: 10m
             scrapeTimeout: 2m
+        serviceName: radarr-metrics
     ingress:
       main:
         enabled: true
