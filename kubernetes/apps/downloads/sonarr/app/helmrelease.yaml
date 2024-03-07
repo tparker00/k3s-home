@@ -103,7 +103,6 @@ spec:
             port: *metricsPort
     serviceMonitor:
       main:
-        nameOverride: metrics
         enabled: true
         endpoints:
           - port: metrics
@@ -111,6 +110,7 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 20s
+        serviceName: sonarr-metrics
     ingress:
       main:
         enabled: true
