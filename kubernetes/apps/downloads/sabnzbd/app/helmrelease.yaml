@@ -68,6 +68,16 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 12Gi
+          secondary:
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.0.0
+              pullPolicy: IfNotPresent
+            env:
+              - name: PORT
+                value: &metricsPort 9794
+            envFrom: *envFrom
+            args: ["sabnzbd"]
         pod:
           securityContext:
             runAsUser: 568
@@ -79,6 +89,22 @@ spec:
         ports:
           http:
             port: *port
+      secondary:
+        nameOverride: metrics
+        controller: main
+        ports:
+          metrics:
+            port: *metricsPort
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 10m
+            scrapeTimeout: 2m
+        serviceName: radarr-metrics
     ingress:
       main:
         enabled: true
