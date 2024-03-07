@@ -44,7 +44,7 @@ spec:
                 sabnzbd.downloads.svc.cluster,
                 sabnzbd.downloads.svc.cluster.local,
                 sabnzbd.${SECRET_DOMAIN}
-            envFrom:
+            envFrom: &envFrom
               - secretRef:
                   name: sabnzbd-secret
             probes:
