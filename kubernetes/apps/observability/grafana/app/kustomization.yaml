@@ -9,9 +9,9 @@ resources:
 configMapGenerator:
   - name: grafana-dashboard-exportarr
     files:
-      - ./dashboards/exportarr.json
+      - exportarr.json=./dashboards/exportarr.json
   - name: grafana-dashboard-exportarr2
-      - ./dashboards/exportarr2.json
+      - exportarr2.json=./dashboards/exportarr2.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
