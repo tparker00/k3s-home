@@ -31,6 +31,7 @@ spec:
           reloader.stakater.com/auto: "true"
         containers:
           main:
+            nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/sabnzbd
               tag: "4.2.2"

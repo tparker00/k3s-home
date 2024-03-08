@@ -40,6 +40,7 @@ spec:
                   name: radarr-secret
         containers:
           main:
+            nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/radarr
               tag: "5.3.6.8612"
