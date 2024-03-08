@@ -73,7 +73,7 @@ spec:
                 enabled: false
           secondary:
             image:
-              repository: ghcr.io/joryirving/exportarr
+              repository: ghcr.io/onedr0p/exportarr
               tag: v2.0.0
               pullPolicy: IfNotPresent
             env:
