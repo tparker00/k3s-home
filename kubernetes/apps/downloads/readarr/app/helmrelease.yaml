@@ -1,0 +1,156 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app readarr
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "monitoring"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: readarr-secret
+        containers:
+          main:
+            nameOverride: *app
+            image:
+              repository: ghcr.io/joryirving/readarr
+              tag: 0.3.18.2411@sha256:8975ccca79ecbe05c4575f7196ba1a23698cf9c965fe1a2b15bb9fe1611387a1
+            env:
+              TZ: ${TIMEZONE}
+              READARR__INSTANCE_NAME: Readarr
+              READARR__PORT: &port 80
+              READARR__LOG_LEVEL: info
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 1000Mi
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+          secondary:
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.0.0
+              pullPolicy: IfNotPresent
+            env:
+              - name: PORT
+                value: &metricsPort 9794
+            envFrom: *envFrom
+            args: ["readarr"]
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+      secondary:
+        nameOverride: metrics
+        controller: main
+        ports:
+          metrics:
+            port: *metricsPort
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 20s
+        serviceName: readarr-metrics
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: Readarr
+          gethomepage.dev/icon: readarr.png
+          gethomepage.dev/description: eBook Downloads
+          gethomepage.dev/widget.type: readarr
+          gethomepage.dev/widget.url: http://readarr.downloads
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_READARR_TOKEN}}"
+          nginx.ingress.kubernetes.io/configuration-snippet: |-
+            proxy_set_header Accept-Encoding "";
+            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.${SECRET_DOMAIN}/css/base/readarr/nord.css"></head>';
+            sub_filter_once on;
+
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+              - path: /metrics
+                service:
+                  name: secondary
+                  port: metrics
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+      tmp:
+        type: emptyDir
+      data:
+        enabled: true
+        type: hostPath
+        hostPath: ${SECRET_MFS_DATA:=temp}
+        globalMounts:
+          - path: /data
