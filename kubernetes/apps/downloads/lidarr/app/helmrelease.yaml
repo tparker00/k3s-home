@@ -82,7 +82,7 @@ spec:
               - name: PORT
                 value: &metricsPort 9794
             envFrom: *envFrom
-            args: ["sonarr"]
+            args: ["lidarr"]
         pod:
           securityContext:
             runAsUser: 568
