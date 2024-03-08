@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg-cluster
     - name: external-secrets-bitwarden
-  path: ./kubernetes/apps/downloads/bazar/app
+  path: ./kubernetes/apps/downloads/bazarr/app
   prune: true
   sourceRef:
     kind: GitRepository
