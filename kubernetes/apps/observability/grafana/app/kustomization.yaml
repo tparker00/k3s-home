@@ -7,12 +7,9 @@ resources:
   - ./helmrelease.yaml
   - ../../../../templates/gatus/external
 configMapGenerator:
-  - name: exportarr
+  - name: media-dashboard
     files:
-      - ./dashboards/exportarr.json
-  - name: exportarr2
-    files:
-      - ./dashboards/exportarr2.json
+      - ./dashboards/media.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
