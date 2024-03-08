@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./bazarr/ks.yaml
   - ./namespace.yaml
+  - ./lidarr/ks.yaml
   - ./mylar/ks.yaml
   - ./prowlarr/ks.yaml
   - ./tdarr-node/ks.yaml
