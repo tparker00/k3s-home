@@ -7,11 +7,12 @@ resources:
   - ./helmrelease.yaml
   - ../../../../templates/gatus/external
 configMapGenerator:
-  - name: grafana-dashboard-exportarr
+  - name: exportarr
     files:
-      - exportarr.json=./dashboards/exportarr.json
-  - name: grafana-dashboard-exportarr2
-      - exportarr2.json=./dashboards/exportarr2.json
+      - ./dashboards/exportarr.json
+  - name: exportarr2
+    files:
+      - ./dashboards/exportarr2.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
