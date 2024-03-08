@@ -102,9 +102,9 @@ spec:
           - port: metrics
             scheme: http
             path: /metrics
-            interval: 10m
-            scrapeTimeout: 2m
-        serviceName: radarr-metrics
+            interval: 1m
+            scrapeTimeout: 20s
+        serviceName: sabnzbd-metrics
     ingress:
       main:
         enabled: true
