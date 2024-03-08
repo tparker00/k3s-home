@@ -1,9 +1,8 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app prowlarr
 spec:
   interval: 30m
   chart:
@@ -39,27 +38,24 @@ spec:
               pullPolicy: IfNotPresent
             envFrom: &envFrom
               - secretRef:
-                  name: sonarr-secret
+                  name: prowlarr-secret
         containers:
           main:
             nameOverride: *app
             image:
-              repository: ghcr.io/joryirving/sonarr
-              tag: "4.0.2.1183"
+              repository: ghcr.io/joryirving/prowlarr-develop
+              tag: 1.14.0.4286@sha256:0c1c29f8693b5440ccf262204706711df6588c88ddcd374fbd9283034d5c35ff
             env:
               TZ: ${TIMEZONE}
-              SONARR__AUTHENTICATION_METHOD: External
-              SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
-              SONARR__INSTANCE_NAME: Sonarr
-              SONARR__PORT: &port 80
-              SONARR__LOG_LEVEL: info
+              PROWLARR__INSTANCE_NAME: Prowlarr
+              PROWLARR__PORT: &port 80
+              PROWLARR__LOG_LEVEL: info
+              PROWLARR__AUTHENTICATION_METHOD: External
             envFrom: *envFrom
             resources:
               requests:
                 cpu: 10m
-                memory: 250Mi
-              limits:
-                memory: 1000Mi
+                memory: 500Mi
             probes:
               liveness: &probes
                 enabled: true
@@ -84,7 +80,7 @@ spec:
               - name: PORT
                 value: &metricsPort 9794
             envFrom: *envFrom
-            args: ["sonarr"]
+            args: ["prowlarr"]
         pod:
           securityContext:
             runAsUser: 568
@@ -111,7 +107,7 @@ spec:
             path: /metrics
             interval: 1m
             scrapeTimeout: 20s
-        serviceName: sonarr-metrics
+        serviceName: prowlarr-metrics
     ingress:
       main:
         enabled: true
@@ -119,36 +115,26 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Downloads
-          gethomepage.dev/name: Sonarr
-          gethomepage.dev/icon: sonarr.png
-          gethomepage.dev/widget.type: sonarr
-          gethomepage.dev/widget.url: http://sonarr.downloads
-          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            proxy_set_header Accept-Encoding "";
-            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.${SECRET_DOMAIN}/css/base/sonarr/nord.css"></head>';
-            sub_filter_once on;
+          gethomepage.dev/name: Prowlarr
+          gethomepage.dev/icon: prowlarr.png
+          gethomepage.dev/description: Torrent/NZB Indexer Management
+          gethomepage.dev/widget.type: prowlarr
+          gethomepage.dev/widget.url: http://prowlarr.downloads
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PROWLARR_TOKEN}}"
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
-              - path: /metrics
-                service:
-                  name: secondary
-                  port: metrics
+        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+            service:
+              name: main
+              port: http
         tls:
-          - hosts:
-              - *host
+        - hosts:
+          - *host
     persistence:
       config:
         enabled: true
-        existingClaim: *app
-      data:
-        enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
-        globalMounts:
-          - path: /data
+        type: emptyDir
+      tmp:
+        type: emptyDir
