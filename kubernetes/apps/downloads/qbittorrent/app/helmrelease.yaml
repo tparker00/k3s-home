@@ -38,8 +38,6 @@ spec:
             env:
               TZ: ${TIMEZONE}
               QBITTORRENT__PORT: &port 8080
-              QBT_Preferences__WebUI__AlternativeUIEnabled: false
-              QBT_Preferences__WebUI__LocalHostAuth: false
             probes:
               liveness: &probes
                 enabled: true
