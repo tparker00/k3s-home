@@ -84,6 +84,7 @@ spec:
               tag: v3.37.0
             env:
               VPN_SERVICE_PROVIDER: protonvpn
+              VPN_PORT_FORWARDING: "on"
               DOT: "off"
             envFrom:
               - secretRef:
