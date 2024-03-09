@@ -62,8 +62,11 @@ spec:
               startup:
                 enabled: false
             securityContext:
-              runasUser: 568
-              runasGroup: 568
+              runAsUser: 568
+              runAsGroup: 568
+              fsGroup: 568
+              fsGroupChangePolicy: OnRootMismatch
+              supplementalGroups: [10000]
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
@@ -85,13 +88,6 @@ spec:
               capabilities:
                 add:
                   - NET_ADMIN
-        pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [10000]
     service:
       main:
         ports:
