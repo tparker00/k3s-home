@@ -110,16 +110,6 @@ spec:
         ports:
           http:
             port: *port
-      bittorrent:
-        controller: main
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 10.10.5.9
-        ports:
-          bittorrent:
-            enabled: true
-            port: *bittorrentPort
-            protocol: TCP
     ingress:
       main:
         enabled: true
