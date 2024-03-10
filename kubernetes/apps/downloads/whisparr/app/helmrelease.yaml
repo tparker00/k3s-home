@@ -40,10 +40,9 @@ spec:
                   name: whisparr-secret
         containers:
           main:
-            nameOverride: *app
             image:
-              repository: ghcr.io/h3mmy/whisparr-nightly
-              tag: 2.0.0.355@sha256:1c6cb899ea31a4dc67573c148dcdaf07f691ad0da4867760fc88d1a2238adee0
+              repository: ghcr.io/hotio/whisparr
+              tag: nightly-7d0a46e
             env:
               TZ: ${TIMEZONE}
               PUID: 568
