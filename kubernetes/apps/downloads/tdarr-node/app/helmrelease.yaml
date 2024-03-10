@@ -65,6 +65,15 @@ spec:
                   operator: In
                   values:
                     - "true"
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/instance
+                  operator: In
+                  values:
+                    - "tdarr-node"
+            topologyKey: "kubernetes.io/hostname"
     service:
       main:
         enabled: false
