@@ -42,8 +42,8 @@ spec:
           main:
             nameOverride: *app
             image:
-              repository: docker.io/hotio/whisparr
-              tag: nightly-6a44c0d
+              repository: ghcr.io/h3mmy/whisparr-nightly
+              tag: 2.0.0.355@sha256:1c6cb899ea31a4dc67573c148dcdaf07f691ad0da4867760fc88d1a2238adee0
             env:
               TZ: ${TIMEZONE}
               PUID: 568
