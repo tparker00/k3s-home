@@ -89,6 +89,9 @@ spec:
             env:
               QBITTORRENT_SERVER: localhost
               QBITTORRENT_PORT: 8080
+              FIREWALL_INPUT_PORTS: 8080
+              FIREWALL_DEBUG: "on"
+              FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
       main:
