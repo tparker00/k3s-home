@@ -74,6 +74,8 @@ spec:
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_PORT_FORWARDING: "on"
               DOT: "off"
+              FIREWALL_INPUT_PORTS: *port
+              FIREWALL_DEBUG: "on"
             envFrom:
               - secretRef:
                   name: gluetun-secret
@@ -89,8 +91,6 @@ spec:
             env:
               QBITTORRENT_SERVER: localhost
               QBITTORRENT_PORT: *port
-              FIREWALL_INPUT_PORTS: *port
-              FIREWALL_DEBUG: "on"
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
       main:
