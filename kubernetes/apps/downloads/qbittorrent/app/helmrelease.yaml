@@ -94,6 +94,10 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
+      main:
+        ports:
+          http:
+            port: 9999
       gluetun:
         controller: main
         ports:
