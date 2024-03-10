@@ -94,12 +94,12 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
-      main:
+      gluetun:
         ports:
           http:
             port: *port
     ingress:
-      main:
+      gluetun:
         enabled: true
         className: internal
         annotations:
