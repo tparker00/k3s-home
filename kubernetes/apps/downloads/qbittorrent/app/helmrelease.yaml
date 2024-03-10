@@ -87,12 +87,9 @@ spec:
               repository: docker.io/snoringdragon/gluetun-qbittorrent-port-manager
               tag: "1.0"
             env:
-              - name: QBITTORRENT_SERVER
-                value: localhost
-              - name: QBITTORRENT_PORT
-                value: "8080"
-              - name: PORT_FORWARDED
-                value: "/tmp/gluetun/forwarded_port"
+              QBITTORRENT_SERVER: localhost
+              QBITTORRENT_PORT: 8080
+              PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
       main:
         ports:
@@ -102,8 +99,16 @@ spec:
       main:
         enabled: true
         className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_hide_header "x-webkit-csp";
+            proxy_hide_header "content-security-policy";
+            proxy_hide_header "X-Frame-Options";
+            proxy_set_header Accept-Encoding "";
+            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.mapanare.net/css/base/qbittorrent/nord.css"></head>';
+            sub_filter_once on;
         hosts:
-          - host: &host qb.${SECRET_DOMAIN}
+          - host: &host "qb.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
