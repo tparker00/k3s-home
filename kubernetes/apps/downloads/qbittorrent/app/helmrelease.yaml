@@ -95,11 +95,12 @@ spec:
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
       gluetun:
+        controller: main
         ports:
           http:
             port: *port
     ingress:
-      gluetun:
+      main:
         enabled: true
         className: internal
         annotations:
@@ -119,7 +120,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  name: gluetun
                   port: http
         tls:
           - hosts:
