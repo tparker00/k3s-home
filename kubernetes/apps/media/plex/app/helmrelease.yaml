@@ -63,6 +63,15 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [44, 105, 10000]
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: intel.feature.node.kubernetes.io/gpu
+                  operator: In
+                  values:
+                    - "true"
     service:
       main:
         type: LoadBalancer
