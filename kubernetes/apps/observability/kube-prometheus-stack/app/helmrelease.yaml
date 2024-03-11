@@ -29,6 +29,8 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: storage
+    - name: thanos
+      namespace: observability
   valuesFrom:
     - kind: ConfigMap
       name: kube-state-metrics-configmap
@@ -163,11 +165,6 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
-        alertingEndpoints:
-          - namespace: observability
-            name: alertmanager
-            port: 9093
-            apiVersion: v2
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
