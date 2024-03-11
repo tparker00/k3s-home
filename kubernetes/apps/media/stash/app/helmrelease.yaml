@@ -43,8 +43,10 @@ spec:
               requests:
                 cpu: 15m
                 memory: 512Mi
+                gpu.intel.com/i915: 1
               limits:
-                memory: 4Gi
+                gpu.intel.com/i915: 1
+                memory: 8Gi
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
