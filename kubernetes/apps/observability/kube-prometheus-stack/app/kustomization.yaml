@@ -10,5 +10,8 @@ configMapGenerator:
   - name: kube-state-metrics-configmap
     files:
       - kube-state-metrics.yaml=./resources/kube-state-metrics.yaml
+  - name: alertmanager-config-tpl
+    files:
+      - alertmanager.yaml=./resources/alertmanager.yaml
 generatorOptions:
   disableNameSuffixHash: true
