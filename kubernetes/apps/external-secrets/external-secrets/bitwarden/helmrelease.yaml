@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/joryirving/bitwarden-cli
-              tag: 2024.2.1@sha256:74c00a7ac5d35ca4a86f8f00fc9abe1f3cdec59239a48bed8f2b9f04004a468b
+              tag: 2024.2.1@sha256:10a09ef83140a626d60c3d993105129f22a95b98d041acca1d216dde0163055e
             envFrom:
               - secretRef:
                   name: bitwarden-cli
