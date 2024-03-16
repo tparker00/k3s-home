@@ -62,7 +62,7 @@ spec:
             image:
               # TODO: move to semver once available
               repository: twinproduction/gatus
-              tag: latest@sha256:5384351880ceb6a4b31058d55f9998aa6c96908afad3c374324822e742cd6450
+              tag: latest@sha256:186583521c119d5ac7731ad58dc765c60c6fcfd693990adda017992d2b5c5f12
             env:
               TZ: ${TIMEZONE}
               GATUS_CONFIG_PATH: /config
