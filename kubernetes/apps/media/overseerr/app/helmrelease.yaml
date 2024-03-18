@@ -94,6 +94,6 @@ spec:
         enabled: true
         existingClaim: *app
         advancedMounts:
-          overseer:
+          overseerr:
             app:
               - path: /app/config
