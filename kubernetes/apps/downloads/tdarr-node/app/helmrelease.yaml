@@ -87,9 +87,9 @@ spec:
             topologyKey: "kubernetes.io/hostname"
     service:
       app:
+        controller: tdarr
         enabled: false
         ports:
-          enabled: false
           http:
             port: 8265
 
