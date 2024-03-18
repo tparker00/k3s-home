@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: stashapp/stash
-              tag: v0.25.0
+              tag: v0.25.1
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
