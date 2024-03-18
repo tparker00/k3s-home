@@ -97,9 +97,9 @@ spec:
         ports:
           http:
             port: *port
-      secondary:
+      metrics:
         nameOverride: metrics
-        controller: main
+        controller: sonarr
         ports:
           metrics:
             port: *metricsPort
