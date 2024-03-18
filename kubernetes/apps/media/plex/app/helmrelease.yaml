@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      plex:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/plex
               tag: 1.32.8.7639-fb6452ebf
@@ -75,7 +75,8 @@ spec:
                   values:
                     - "true"
     service:
-      main:
+      app:
+        controller: plex
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${SVC_PLEX_ADDR}
@@ -83,7 +84,7 @@ spec:
           http:
             port: 32400
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -100,7 +101,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:

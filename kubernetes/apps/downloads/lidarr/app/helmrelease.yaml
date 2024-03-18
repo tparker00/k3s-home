@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      lidarr:
         annotations:
           reloader.stakater.com/auto: "true"
           prometheus.io/scrape: "true"
@@ -41,7 +41,7 @@ spec:
               - secretRef:
                   name: lidarr-secret
         containers:
-          main:
+          app:
             nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/lidarr-develop
@@ -73,7 +73,7 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-          secondary:
+          metrics:
             image:
               repository: ghcr.io/onedr0p/exportarr
               tag: v2.0.0
@@ -90,18 +90,19 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: lidarr
         ports:
           http:
             port: *port
-      secondary:
+      metrics:
         nameOverride: metrics
-        controller: main
+        controller: lidarr
         ports:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      main:
+      app:
         enabled: true
         endpoints:
           - port: metrics
@@ -111,7 +112,7 @@ spec:
             scrapeTimeout: 20s
         serviceName: lidarr-metrics
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -131,11 +132,11 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
               - path: /metrics
                 service:
-                  name: secondary
+                  identifier: metrics
                   port: metrics
         tls:
           - hosts:

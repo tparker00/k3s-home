@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      restic:
         type: cronjob
         annotations:
           reloader.stakater.com/auto: "true"
@@ -34,7 +34,7 @@ spec:
           schedule: 0 */6 * * *
           successfulJobsHistory: 4
         containers:
-          main:
+          app:
             nameOverride: backup
             image:
               repository: ghcr.io/lobaro/restic-backup-docker
@@ -57,7 +57,7 @@ spec:
           schedule: 0 23 * * 3
           successfulJobsHistory: 4
         containers:
-          main:
+          app:
             nameOverride: check
             image:
               repository: ghcr.io/lobaro/restic-backup-docker
@@ -72,9 +72,6 @@ spec:
             envFrom:
               - secretRef:
                   name: *app
-    service:
-      main:
-        enabled: false
     persistence:
       config:
         enabled: true

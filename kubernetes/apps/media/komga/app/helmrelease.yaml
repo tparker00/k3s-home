@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      komga:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: gotson/komga
               tag: "1.10.4@sha256:5b4f581be33141f07abed7bb665077352fb046183f3614b0a647530588784735"
@@ -43,13 +43,24 @@ spec:
                 memory: 1Gi
               limits:
                 memory: 4Gi
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
     service:
-      main:
+      app:
+        controller: komga
         ports:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -63,7 +74,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:

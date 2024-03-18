@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      plex-meta-manager:
         type: cronjob
         annotations:
           reloader.stakater.com/auto: "true"
@@ -34,7 +34,7 @@ spec:
           schedule: 0 6 * * *
           successfulJobsHistory: 4
         containers:
-          main:
+          app:
             image:
               repository: meisnate12/plex-meta-manager
               tag: v1.20.0
@@ -56,9 +56,6 @@ spec:
             runAsGroup: 568
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-    service:
-      main:
-        enabled: false
     persistence:
       config:
         enabled: true

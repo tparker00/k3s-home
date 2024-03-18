@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      gatus:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -58,7 +58,7 @@ spec:
               limits:
                 memory: 128Mi
         containers:
-          main:
+          app:
             image:
               # TODO: move to semver once available
               repository: twinproduction/gatus
@@ -91,15 +91,16 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: gatus
         ports:
           http:
             port: *port
     serviceMonitor:
-      main:
+      app:
         enabled: true
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -115,7 +116,7 @@ spec:
           paths:
           - path: /
             service:
-              name: main
+              identifier: app
               port: http
         tls:
         - hosts:

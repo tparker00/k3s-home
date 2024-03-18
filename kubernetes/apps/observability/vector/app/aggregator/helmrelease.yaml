@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      vector-aggregator:
         replicas: 2
         strategy: RollingUpdate
         annotations:
@@ -44,7 +44,7 @@ spec:
         #       - secretRef:
         #           name: *app
         containers:
-          main:
+          app:
             image:
               repository: docker.io/timberio/vector
               tag: 0.36.1-debian@sha256:67c4cfc8fd70c7a0182fdc3ba815f34cebb0c9702e9a0a2b1fbe4f11dac719fa
@@ -58,7 +58,8 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      main:
+      app:
+        controller: vector-aggregator
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: vector.${SECRET_DOMAIN}

@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      plex-auto-languages:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: remirigal/plex-auto-languages
               tag: v1.2.3
@@ -44,6 +44,10 @@ spec:
                 memory: 200M
               limits:
                 memory: 400M
-    service:
-      main:
-        enabled: false
+    persistence:
+      config:
+        type: emptyDir
+      local:
+        type: emptyDir
+        globalMounts:
+          - path: /.local

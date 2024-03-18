@@ -19,10 +19,10 @@ spec:
       namespace: kube-system
   values:
     controllers:
-      main:
+      intel-gpu-plugin:
         type: daemonset
         containers:
-          main:
+          app:
             image:
               repository: intel/intel-gpu-plugin
               tag: 0.29.0

@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      minio:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2024-01-29T03-56-32Z
@@ -75,14 +75,15 @@ spec:
               limits:
                 memory: 3Gi
     service:
-      main:
+      app:
+        controller: minio
         ports:
           http:
             port: 9001
           s3:
             port: 9000
     serviceMonitor:
-      main:
+      app:
         enabled: true
         endpoints:
           - port: s3
@@ -91,7 +92,7 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -103,7 +104,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -121,7 +122,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: s3
         tls:
           - hosts:

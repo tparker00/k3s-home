@@ -25,10 +25,10 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      system-upgrade-controller:
         strategy: RollingUpdate
         containers:
-          main:
+          app:
             image:
               repository: docker.io/rancher/system-upgrade-controller
               tag: v0.13.4
@@ -73,9 +73,6 @@ spec:
     serviceAccount:
       create: true
       name: system-upgrade
-    service:
-      main:
-        enabled: false
     persistence:
       tmp:
         type: emptyDir

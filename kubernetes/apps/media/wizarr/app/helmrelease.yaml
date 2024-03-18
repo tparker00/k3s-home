@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      wizarr:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository:  ghcr.io/wizarrrr/wizarr
               tag: 3.5.1
@@ -43,12 +43,13 @@ spec:
               limits:
                 memory: 300M
     service:
-      main:
+      app:
+        controller: wizarr
         ports:
           http:
             port: 5690
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -66,7 +67,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
