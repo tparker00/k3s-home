@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,12 +26,12 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      speedtest-exporter:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/miguelndecarvalho/speedtest-exporter
               tag: v3.5.4
@@ -44,11 +44,9 @@ spec:
               limits:
                 memory: 100Mi
     service:
-      main:
-        enabled: false
       metrics:
         enabled: true
-        controller: main
+        controller: speedtest-exporter
         ipFamilyPolicy: PreferDualStack
         ports:
           metrics:

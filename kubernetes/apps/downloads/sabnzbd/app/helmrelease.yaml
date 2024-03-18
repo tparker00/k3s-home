@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      sabnzbd:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/sabnzbd
@@ -69,7 +69,7 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 12Gi
-          secondary:
+          metrics:
             image:
               repository: ghcr.io/onedr0p/exportarr
               tag: v2.0.0
@@ -86,18 +86,19 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: sabnzbd
         ports:
           http:
             port: *port
-      secondary:
+      metrics:
         nameOverride: metrics
-        controller: main
+        controller: sabnzbd
         ports:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      main:
+      app:
         enabled: true
         endpoints:
           - port: metrics
@@ -107,7 +108,7 @@ spec:
             scrapeTimeout: 20s
         serviceName: sabnzbd-metrics
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -127,11 +128,11 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
               - path: /metrics
                 service:
-                  name: secondary
+                  identifier: metrics
                   port: metrics
         tls:
           - hosts:

@@ -9,4 +9,3 @@ resources:
   - ./languagetool/ks.yaml
   - ./homepage/ks.yaml
   - ./namespace.yaml
-  - ./orcaslicer/ks.yaml

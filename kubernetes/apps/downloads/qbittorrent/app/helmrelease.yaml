@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     controllers:
-      main:
+      qbitorrent:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -31,7 +31,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/qbittorrent
               tag: 4.6.3@sha256:f2895e632fe66299d8ccc68265cc11aea92a232b7d0844de9961864b3e504026
@@ -92,17 +92,18 @@ spec:
               QBITTORRENT_PORT: *port
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
     service:
-      main:
+      app:
+        controller: qbitorrent
         ports:
           http:
             port: 9999
       gluetun:
-        controller: main
+        controller: qbitorrent
         ports:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -122,7 +123,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: gluetun
+                  identifier: gluetun
                   port: http
         tls:
           - hosts:

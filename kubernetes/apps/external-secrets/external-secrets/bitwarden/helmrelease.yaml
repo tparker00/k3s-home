@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      bitwarden:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/joryirving/bitwarden-cli
               tag: 2024.2.1@sha256:10a09ef83140a626d60c3d993105129f22a95b98d041acca1d216dde0163055e
@@ -54,7 +54,8 @@ spec:
               limits:
                 memory: 512Mi
     service:
-      main:
+      app:
+        controller: bitwarden
         ports:
           http:
             port: 8087

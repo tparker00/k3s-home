@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -25,81 +25,97 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      gatus:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
           init-db:
-            order: 1
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16
-              pullPolicy: IfNotPresent
             envFrom: &envFrom
             - secretRef:
                 name: gatus-secret
           init-config:
-            order: 2
             image: &configSyncImage
               repository: ghcr.io/kiwigrid/k8s-sidecar
               tag: 1.26.1
-              pullPolicy: IfNotPresent
-            env:
+            env: &configSyncEnv
               FOLDER: /config
               LABEL: gatus.io/enabled
               NAMESPACE: ALL
               RESOURCE: both
               UNIQUE_FILENAMES: true
               METHOD: LIST
-            resources: &configSyncResources
+            resources: &resources
               requests:
                 cpu: 10m
                 memory: 10Mi
               limits:
                 memory: 128Mi
         containers:
-          main:
+          app:
             image:
-              # TODO: move to semver once available
-              repository: twinproduction/gatus
-              tag: latest@sha256:186583521c119d5ac7731ad58dc765c60c6fcfd693990adda017992d2b5c5f12
+              repository: ghcr.io/twin/gatus
+              tag: v5.8.0@sha256:fecb4c38722df59f5e00ab4fcf2393d9b8dad9161db208d8d79386dc86da8a55
             env:
               TZ: ${TIMEZONE}
               GATUS_CONFIG_PATH: /config
               CUSTOM_WEB_PORT: &port 80
             envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 10m
-                memory: 256M
-              limits:
-                memory: 512M
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: &path /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources: *resources
           config-sync:
             image: *configSyncImage
             env:
-              FOLDER: /config
-              LABEL: gatus.io/enabled
-              NAMESPACE: ALL
-              RESOURCE: both
-              UNIQUE_FILENAMES: true
+              <<: *configSyncEnv
               METHOD: WATCH
-            resources: *configSyncResources
+            securityContext: *securityContext
+            resources: *resources
         pod:
+          dnsConfig:
+            options:
+              - { name: ndots, value: "1" }
           securityContext:
             runAsUser: 568
             runAsGroup: 568
+            runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: gatus
         ports:
           http:
             port: *port
     serviceMonitor:
-      main:
+      app:
         enabled: true
+        serviceName: gatus
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            internal: 1m
+            scrapeTimeout: 10s
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -115,7 +131,7 @@ spec:
           paths:
           - path: /
             service:
-              name: main
+              identifier: app
               port: http
         tls:
         - hosts:

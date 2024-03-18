@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -24,10 +24,10 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      echo-server:
         strategy: RollingUpdate
         containers:
-          main:
+          app:
             image:
               repository: docker.io/jmalloc/echo-server
               tag: 0.3.6
@@ -59,13 +59,12 @@ spec:
             runAsUser: 568
             runAsGroup: 568
     service:
-      main:
+      app:
+        controller: echo-server
         ports:
           http:
             port: *port
     ingress:
-      main:
-        enabled: false
       external:
         enabled: true
         className: external
@@ -76,7 +75,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -89,7 +88,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
