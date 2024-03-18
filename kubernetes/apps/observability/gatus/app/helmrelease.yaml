@@ -99,6 +99,7 @@ spec:
     serviceMonitor:
       app:
         enabled: true
+        serviceName: gatus
     ingress:
       app:
         enabled: true

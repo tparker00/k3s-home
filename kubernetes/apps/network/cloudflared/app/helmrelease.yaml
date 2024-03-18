@@ -86,6 +86,7 @@ spec:
     serviceMonitor:
       app:
         enabled: true
+        serviceName: cloudflared
     persistence:
       config:
         enabled: true
