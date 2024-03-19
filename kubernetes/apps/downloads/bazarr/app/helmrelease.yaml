@@ -140,6 +140,10 @@ spec:
             service:
               identifier: app
               port: http
+          - path: /metrics
+            service:
+              identifier: metrics
+              port: metrics
         tls:
         - hosts:
           - *host
