@@ -44,7 +44,7 @@ spec:
                 spec:
                   exec:
                     command:  ["wget", "-q", "http://127.0.0.1:8087/sync", "--post-data=''"]
-                  timeoutSeconds: 5
+                  timeoutSeconds: 15
               readiness:
                 enabled: false
             resources:
