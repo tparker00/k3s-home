@@ -88,7 +88,7 @@ settings:
 
 plex:
   url: http://plex.media.svc.cluster.local:32400
-  token: {{ .PLEX_APIKEY }}
+  token: {{ .plex_token }}
   timeout: 60
   clean_bundles: true
   empty_trash: true
@@ -96,11 +96,11 @@ plex:
 
 tautulli:
   url: http://tautulli.media.svc.cluster.local:8181
-  apikey: {{ .TAUTULLI_APIKEY }}
+  apikey: {{ .tautulli_token }}
 
 radarr:
-  url: http://radarr.downloads.svc.cluster.local
-  token: {{ .RADARR_APIKEY }}
+  url: http://radarr-app.downloads.svc.cluster.local
+  token: {{ .radarr_token }}
   add_missing: false
   add_existing: false
   root_folder_path: /data/movies
@@ -114,8 +114,8 @@ radarr:
   upgrade_existing: false
 
 sonarr:
-  url: http://sonarr.downloads.svc.cluster.local
-  token: {{ .SONARR_APIKEY }}
+  url: http://sonarr-app.downloads.svc.cluster.local
+  token: {{ .sonarr_token }}
   add_missing: false
   add_existing: false
   root_folder_path: /data/tv
@@ -132,27 +132,27 @@ sonarr:
   upgrade_existing: false
 
 tmdb:
-  apikey: {{ .TMDB_APIKEY }}
+  apikey: {{ .tmdb_token }}
   language: en
   cache_expiration: 60
   region:
 
 trakt:
-  client_id: {{ .TRAKT_CLIENT_ID }}
-  client_secret: {{ .TRAKT_CLIENT_SECRET }}
+  client_id: {{ .trakt_client_id }}
+  client_secret: {{ .trakt_client_secret }}
   authorization:
-    access_token: {{ .TRAKT_ACCESS_TOKEN }}
+    access_token: {{ .trakt_access_token }}
     token_type: Bearer
-    expires_in: {{ .TRAKT_EXPIRES_IN }}
-    refresh_token: {{ .TRAKT_REFRESH_TOKEN }}
+    expires_in: {{ .trakt_expires_in }}
+    refresh_token: {{ .trakt_refresh_token }}
     scope: public
-    created_at: {{ .TRAKT_CREATED_AT }}
+    created_at: {{ .trakt_created_at }}
   pin:
 
 mdblist:
-  apikey: {{ .MDBLIST_APIKEY }}
+  apikey: {{ .mdblist_token }}
   cache_expiration: 60
 
 omdb:
-  apikey: {{ .OMDB_APIKEY }}
+  apikey: {{ .omdb_token }}
   cache_expiration: 60
