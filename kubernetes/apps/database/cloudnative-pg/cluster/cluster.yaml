@@ -42,7 +42,7 @@ spec:
       endpointURL: https://s3.${SECRET_DOMAIN}
       # Note: serverName version needs to be incremented or changed
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster postgres-v5
+      serverName: &currentCluster postgres-v1
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
