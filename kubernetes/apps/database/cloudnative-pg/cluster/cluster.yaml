@@ -54,5 +54,9 @@ spec:
   # # cluster when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      backup:
-        name: poestgres-20240321
+      source: &previousCluster postgres-v4
+  externalClusters:
+    - name: *previousCluster
+      barmanObjectStore:
+        <<: *barmanObjectStore
+        serverName: *previousCluster
