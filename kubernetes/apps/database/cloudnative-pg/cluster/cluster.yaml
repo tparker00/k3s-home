@@ -55,4 +55,4 @@ spec:
   bootstrap:
     recovery:
       backup:
-        name: postgres-latest
+        name: poestgres-20240321
