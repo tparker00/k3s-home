@@ -87,3 +87,9 @@ spec:
           - path: /pgadmin4/config_local.py
             subPath: config_local.py
             readOnly: true
+      nas-backups:
+        enabled: true
+        type: hostPath
+        hostPath: ${SECRET_MFS_POSTGRES:=temp}
+        globalMounts:
+          - path: /backups
