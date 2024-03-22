@@ -60,7 +60,7 @@ spec:
     ingress:
       app:
         enabled: true
-        ingressClassName: internal
+        className: internal
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -83,8 +83,6 @@ spec:
         enabled: true
         type: configMap
         name: pgadmin-local-config-configmap
-        subPath: config_local.py
-        readOnly: true
         globalMounts:
           - path: /pgadmin4/config_local.py
             subPath: config_local.py
