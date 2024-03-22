@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: database
 resources:
   - helmrelease.yaml
+  - externalsecret.yaml
   - ../../../../templates/moosefs
 configMapGenerator:
   - name: pgadmin-local-config-configmap
