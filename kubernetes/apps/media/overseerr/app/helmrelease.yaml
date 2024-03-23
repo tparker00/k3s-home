@@ -71,6 +71,7 @@ spec:
         className: external
         labels:
           theme-park.home/name: overseerr
+          theme-park.home/theme: nord
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
