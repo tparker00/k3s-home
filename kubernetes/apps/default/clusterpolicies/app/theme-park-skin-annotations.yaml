@@ -35,7 +35,7 @@ spec:
             annotations:
               +(nginx.ingress.kubernetes.io/configuration-snippet): |-
                 proxy_set_header Accept-Encoding "";
-                sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://themepark.${EXTERNAL_DOMAIN}/css/base/{{ appName }}/{{ theme }}.css"></head>';
+                sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://themepark.${SECRET_DOMAIN}/css/base/{{ appName }}/{{ theme }}.css"></head>';
                 sub_filter_once on;
         targets:
           - apiVersion: networking.k8s.io/v1
