@@ -117,6 +117,7 @@ spec:
           gethomepage.dev/widget.type: bazarr
           gethomepage.dev/widget.url: http://bazarr.downloads:6767
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_BAZARR_TOKEN}}"
+          theme-park.home/name: bazarr
         hosts:
         - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
           paths:

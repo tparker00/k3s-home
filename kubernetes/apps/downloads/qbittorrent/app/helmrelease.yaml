@@ -131,7 +131,8 @@ spec:
           gethomepage.dev/widget.url: http://qbittorrent.downloads:8080
           gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
           gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
+          theme-park.home/name: qbitorrent
+          nginx.ingress.kubernetes.io/configurat`ion-snippet: |
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

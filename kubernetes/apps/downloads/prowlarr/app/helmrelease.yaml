@@ -122,6 +122,7 @@ spec:
           gethomepage.dev/widget.type: prowlarr
           gethomepage.dev/widget.url: http://prowlarr.downloads
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PROWLARR_TOKEN}}"
+          theme-park.home/name: prowlarr
         hosts:
         - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
           paths:

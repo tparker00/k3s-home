@@ -125,6 +125,7 @@ spec:
           gethomepage.dev/widget.type: sonarr
           gethomepage.dev/widget.url: http://sonarr.downloads
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"
+          theme-park.home/name: sonarr
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
