@@ -4,8 +4,8 @@ MASTER_PASSWORD_REQUIRED = False
 OAUTH2_CONFIG = [{
     'OAUTH2_NAME' : 'authentik',
     'OAUTH2_DISPLAY_NAME' : 'pgadmin SSO',
-    'OAUTH2_CLIENT_ID' : '${AUTHENTIK_CLIENT_ID}',
-    'OAUTH2_CLIENT_SECRET' : '${AUTHENTIK_CLIENT_SECRET}',
+    'OAUTH2_CLIENT_ID' : os.environ.get('AUTHENTIK_CLIENT_ID'),
+    'OAUTH2_CLIENT_SECRET' : os.environ.get('AUTHENTIK_CLIENT_SECRET'),
     'OAUTH2_TOKEN_URL' : 'https://authentik.${SECRET_DOMAIN}/application/o/token/',
     'OAUTH2_AUTHORIZATION_URL' : 'https://authentik.${SECRET_DOMAIN}/application/o/authorize/',
     'OAUTH2_API_BASE_URL' : 'https://authentik.${SECRET_DOMAIN}/',
