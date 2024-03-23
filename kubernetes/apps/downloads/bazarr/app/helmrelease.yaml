@@ -51,16 +51,6 @@ spec:
               requests:
                 cpu: 10m
                 memory: 256M
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
           metrics:
             image:
               repository: ghcr.io/onedr0p/exportarr
