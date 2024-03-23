@@ -27,6 +27,8 @@ spec:
     fullnameOverride: nginx-internal
     controller:
       replicaCount: 2
+      loglevel: 2
+      nginxDebug: true
       service:
         annotations:
           io.cilium/lb-ipam-ips: "10.10.5.8"
@@ -42,6 +44,7 @@ spec:
               operator: In
               values: ["internal"]
       config:
+        error-log-level: "debug"
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
