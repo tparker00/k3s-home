@@ -69,6 +69,8 @@ spec:
       app:
         enabled: true
         className: external
+        labels:
+          theme-park.home/name: overseerr
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
@@ -78,7 +80,7 @@ spec:
           gethomepage.dev/widget.url: http://overseerr.media:5055
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_OVERSEERR_TOKEN}}"
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-          theme-park.home/name: overseerr
+          theme.home.arpa/enabled: "true"
         hosts:
           - host: &host requests.${SECRET_DOMAIN}
             paths:
