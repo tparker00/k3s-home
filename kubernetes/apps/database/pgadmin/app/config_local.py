@@ -1,3 +1,5 @@
+import os
+
 AUTHENTICATION_SOURCES = ['oauth2', 'internal']
 OAUTH2_AUTO_CREATE_USER = True
 MASTER_PASSWORD_REQUIRED = False
