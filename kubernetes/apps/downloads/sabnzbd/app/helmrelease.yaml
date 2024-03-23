@@ -31,7 +31,6 @@ spec:
           reloader.stakater.com/auto: "true"
         containers:
           app:
-            nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/sabnzbd
               tag: "4.2.3"
@@ -82,6 +81,15 @@ spec:
             envFrom: *envFrom
             args: ["sabnzbd"]
         pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values: ["qbittorrent"]
+                topologyKey: kubernetes.io/hostname
           securityContext:
             runAsUser: 568
             runAsGroup: 568
@@ -89,13 +97,13 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: sabnzbd
+        controller: *app
         ports:
           http:
             port: *port
       metrics:
         nameOverride: metrics
-        controller: sabnzbd
+        controller: *app
         ports:
           metrics:
             port: *metricsPort
@@ -151,3 +159,12 @@ spec:
           - path: /downloads
       incomplete:
         type: emptyDir
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values: ["qbittorrent"]
+          topologyKey: kubernetes.io/hostname

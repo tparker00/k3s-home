@@ -91,6 +91,21 @@ spec:
               QBITTORRENT_SERVER: localhost
               QBITTORRENT_PORT: *port
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
+          reannounce:
+            image:
+              repository: ghcr.io/buroa/qbittools
+              tag: v0.11.0
+            args: ["reannounce", "-s", "localhost", "-p", "8080"]
+    pod:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values: ["sabnzbd"]
+              topologyKey: kubernetes.io/hostname
     service:
       app:
         controller: qbitorrent
@@ -107,6 +122,15 @@ spec:
         enabled: true
         className: internal
         annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/name: qBittorrent
+          gethomepage.dev/icon: qbittorrent.png
+          gethomepage.dev/description: Torrent Client
+          gethomepage.dev/widget.type: qbittorrent
+          gethomepage.dev/widget.url: http://qbittorrent.downloads:8080
+          gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
+          gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
           nginx.ingress.kubernetes.io/configuration-snippet: |
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
