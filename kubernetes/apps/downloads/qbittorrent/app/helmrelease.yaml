@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     controllers:
-      qbitorrent:
+      qbittorrent:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
