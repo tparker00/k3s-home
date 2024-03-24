@@ -84,7 +84,7 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
     service:
       main:
-        controller: *appp
+        controller: *app
         ports:
           http:
             port: 6767
