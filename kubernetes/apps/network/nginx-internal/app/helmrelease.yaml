@@ -43,8 +43,8 @@ spec:
             - key: ingress-class
               operator: In
               values: ["internal"]
-      allow-snippet-annotations: "true"
       config:
+        allow-snippet-annotations: "true"
         error-log-level: "debug"
         client-body-buffer-size: 100M
         client-body-timeout: 120
