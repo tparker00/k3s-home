@@ -35,7 +35,7 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
         strategy: RollingUpdate
         containers:
-          app:
+          main:
             image:
               repository: silviof/docker-languagetool
               tag: '6.3'
@@ -60,13 +60,13 @@ spec:
                   failureThreshold: 30
                   periodSeconds: 5
     service:
-      app:
-        controller: languagetool
+      main:
+        controller: *app
         ports:
           http:
             port: 8010
     ingress:
-      app:
+      main:
         enabled: true
         className: external
         annotations:
@@ -76,7 +76,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

@@ -40,7 +40,7 @@ spec:
               - secretRef:
                   name: bazarr-secret
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/joryirving/bazarr
               tag: 1.4.2@sha256:0088ce11a9e9f675ee1d1d0fc368647bae6f0fdfe12b6f4938c9fe75ed0a794b
@@ -83,19 +83,19 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      app:
-        controller: bazarr
+      main:
+        controller: *appp
         ports:
           http:
             port: 6767
       metrics:
         nameOverride: metrics
-        controller: bazarr
+        controller: *app
         ports:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      app:
+      main:
         enabled: true
         endpoints:
           - port: metrics
@@ -105,7 +105,7 @@ spec:
             scrapeTimeout: 20s
         serviceName: bazarr-metrics
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         annotations:
@@ -126,7 +126,7 @@ spec:
           paths:
           - path: /
             service:
-              identifier: app
+              identifier: main
               port: http
           - path: /metrics
             service:

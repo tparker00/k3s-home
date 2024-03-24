@@ -29,7 +29,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/flaresolverr/flaresolverr
               tag: v3.3.16@sha256:088412db1051d04ab32c902266510011aec1dc9f7a3a3bda3f58b93186591347
@@ -58,15 +58,15 @@ spec:
               limits:
                 memory: 1Gi
     service:
-      app:
-        controller: flaresolverr
+      main:
+        controller: *app
         ports:
           http:
             port: *port
           metrics:
             port: *metricsPort
     serviceMonitor:
-      app:
+      main:
         serviceName: flaresolverr
         endpoints:
           - port: metrics

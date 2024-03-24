@@ -41,7 +41,7 @@ spec:
               - secretRef:
                   name: sonarr-secret
         containers:
-          app:
+          main:
             nameOverride: *app
             image:
               repository: ghcr.io/joryirving/sonarr

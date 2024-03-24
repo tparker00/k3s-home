@@ -30,7 +30,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository:  ghcr.io/wizarrrr/wizarr
               tag: 3.5.1
@@ -43,13 +43,13 @@ spec:
               limits:
                 memory: 300M
     service:
-      app:
-        controller: wizarr
+      main:
+        controller: *app
         ports:
           http:
             port: 5690
     ingress:
-      app:
+      main:
         enabled: true
         className: external
         annotations:
@@ -67,7 +67,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

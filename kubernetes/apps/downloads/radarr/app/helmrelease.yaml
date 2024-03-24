@@ -39,7 +39,7 @@ spec:
               - secretRef:
                   name: radarr-secret
         containers:
-          app:
+          main:
             nameOverride: *app
             image:
               repository: ghcr.io/onedr0p/radarr
@@ -90,19 +90,19 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      app:
-        controller: radarr
+      main:
+        controller: *app
         ports:
           http:
             port: *port
       metrics:
         nameOverride: metrics
-        controller: radarr
+        controller: *app
         ports:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      app:
+      main:
         enabled: true
         endpoints:
           - port: metrics
@@ -112,7 +112,7 @@ spec:
             scrapeTimeout: 20s
         serviceName: radarr-metrics
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         annotations:
@@ -132,7 +132,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
               - path: /metrics
                 service:

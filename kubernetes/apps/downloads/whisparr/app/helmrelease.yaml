@@ -39,7 +39,7 @@ spec:
               - secretRef:
                   name: whisparr-secret
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/h3mmy/whisparr-nightly
               tag: 2.0.0.355@sha256:1c6cb899ea31a4dc67573c148dcdaf07f691ad0da4867760fc88d1a2238adee0
@@ -79,13 +79,13 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      app:
-        controller: whisparr
+      main:
+        controller: *app
         ports:
           http:
             port: *port
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         annotations:
@@ -98,7 +98,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

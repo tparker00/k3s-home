@@ -40,7 +40,7 @@ spec:
               - secretRef:
                   name: teslamate-secret
         containers:
-          app:
+          main:
             image:
               repository: teslamate/teslamate
               tag: 1.28.4
@@ -55,14 +55,14 @@ spec:
               limits:
                 memory: 500Mi
     service:
-      app:
-        controller: teslamate
+      main:
+        controller: *app
         type: ClusterIP
         ports:
           http:
             port: 4000
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         hosts:
@@ -71,7 +71,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

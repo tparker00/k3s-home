@@ -30,7 +30,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: stashapp/stash
               tag: v0.25.1
@@ -57,13 +57,13 @@ spec:
                   values:
                     - "true"
     service:
-      app:
-        controller: stash
+      main:
+        controller: *app
         ports:
           http:
             port: 9999
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         hosts:
@@ -71,7 +71,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

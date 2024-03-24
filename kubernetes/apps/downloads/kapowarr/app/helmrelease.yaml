@@ -28,7 +28,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: mrcas/kapowarr
               tag: v1.0.0-beta-4
@@ -41,13 +41,13 @@ spec:
               limits:
                 memory: 600M
     service:
-      app:
+      main:
         controller: *app
         ports:
           http:
             port: 5656
     ingress:
-      app:
+      main:
         className: internal
         annotations:
           gethomepage.dev/enabled: "true"
@@ -60,7 +60,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts: [*host]

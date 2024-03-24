@@ -28,7 +28,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/alexta69/metube
               tag: "2024-01-26"
@@ -37,20 +37,20 @@ spec:
               STATE_DIR: "/config"
               YTDL_OPTIONS: '{"http_headers":{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0"}}'
     service:
-      app:
+      main:
         controller: *app
         ports:
           http:
             port: 8081
     ingress:
-      app:
+      main:
         className: internal
         hosts:
         - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
           paths:
           - path: /
             service:
-              identifier: app
+              identifier: main
               port: http
         tls:
           - hosts: [*host]

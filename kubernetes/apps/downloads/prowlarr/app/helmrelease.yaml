@@ -40,7 +40,7 @@ spec:
               - secretRef:
                   name: prowlarr-secret
         containers:
-          app:
+          main:
             nameOverride: *app
             image:
               repository: ghcr.io/joryirving/prowlarr-develop
@@ -88,19 +88,19 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      app:
-        controller: prowlarr
+      main:
+        controller: *app
         ports:
           http:
             port: *port
       metrics:
         nameOverride: metrics
-        controller: prowlarr
+        controller: *app
         ports:
           metrics:
             port: *metricsPort
     serviceMonitor:
-      app:
+      main:
         enabled: true
         endpoints:
           - port: metrics
@@ -110,7 +110,7 @@ spec:
             scrapeTimeout: 20s
         serviceName: prowlarr-metrics
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         annotations:
@@ -132,7 +132,7 @@ spec:
           - path: /
             pathType: Prefix
             service:
-              identifier: app
+              identifier: main
               port: http
           - path: /metrics
             service:

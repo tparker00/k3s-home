@@ -30,7 +30,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
               repository: kizaing/kavita
               tag: 0.7.8@sha256:48b3c2c07f90feb4641ddb791f96a1bf6e70a2b27da8c8b2ca0cc2c627b91d72
@@ -53,13 +53,13 @@ spec:
                   failureThreshold: 30
                   periodSeconds: 5
     service:
-      app:
-        controller: kavita
+      main:
+        controller: *app
         ports:
           http:
             port: 5000
     ingress:
-      app:
+      main:
         enabled: true
         className: external
         annotations:
@@ -78,7 +78,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts:

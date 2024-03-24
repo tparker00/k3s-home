@@ -31,7 +31,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
         containers:
-          app:
+          main:
             image:
               repository: ghcr.io/onedr0p/qbittorrent
               tag: 4.6.3@sha256:f2895e632fe66299d8ccc68265cc11aea92a232b7d0844de9961864b3e504026
@@ -107,18 +107,18 @@ spec:
                     values: ["sabnzbd"]
               topologyKey: kubernetes.io/hostname
     service:
-      app:
-        controller: qbitorrent
+      main:
+        controller: *app
         ports:
           http:
             port: 9999
       gluetun:
-        controller: qbitorrent
+        controller: *app
         ports:
           http:
             port: *port
     ingress:
-      app:
+      main:
         enabled: true
         className: internal
         annotations:
