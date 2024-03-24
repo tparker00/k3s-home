@@ -92,7 +92,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      app:
+      main:
         controller: *app
         primary: true
         ports:
