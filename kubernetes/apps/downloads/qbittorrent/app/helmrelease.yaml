@@ -167,7 +167,7 @@ spec:
       gluetun-data:
         type: emptyDir
         advancedMounts:
-          qbitorrent:
+          qbittorrent:
             gluetun:
               - path: /tmp/gluetun
             port-forward:
