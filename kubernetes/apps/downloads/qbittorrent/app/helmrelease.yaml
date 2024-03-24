@@ -121,6 +121,9 @@ spec:
       app:
         enabled: true
         className: internal
+        labels:
+          theme-park.home/name: qbitorrent
+          theme-park.home/theme: nord
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Downloads
@@ -131,7 +134,7 @@ spec:
           gethomepage.dev/widget.url: http://qbittorrent.downloads:8080
           gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
           gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
-          theme-park.home/name: qbitorrent
+          theme.home.arpa/enabled: "true"
           nginx.ingress.kubernetes.io/configurat`ion-snippet: |
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
