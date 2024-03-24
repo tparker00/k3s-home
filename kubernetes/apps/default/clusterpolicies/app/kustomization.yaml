@@ -7,4 +7,3 @@ resources:
   - ./add-goldilocks-labels.yaml
   - ./add-psa-labels.yaml
   - ./delete-cpu-limits.yaml
-  - ./theme-park-skin-annotations.yaml
