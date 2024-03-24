@@ -93,13 +93,14 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: sonarr
+        controller: *app
+        primary: true
         ports:
           http:
             port: *port
       metrics:
         nameOverride: metrics
-        controller: sonarr
+        controller: *app
         ports:
           metrics:
             port: *metricsPort
