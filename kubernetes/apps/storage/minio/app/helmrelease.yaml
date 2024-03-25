@@ -27,13 +27,14 @@ spec:
   values:
     controllers:
       minio:
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
               repository: quay.io/minio/minio
-              tag: RELEASE.2024-01-29T03-56-32Z
+              tag: RELEASE.2024-03-21T23-13-43Z
             env:
               MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
               MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
@@ -72,8 +73,6 @@ spec:
               requests:
                 memory: 100Mi
                 cpu: 100m
-              limits:
-                memory: 3Gi
     service:
       app:
         controller: minio
