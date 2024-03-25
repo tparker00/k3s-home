@@ -77,6 +77,7 @@ spec:
     service:
       app:
         controller: minio
+        primary: true
         ports:
           http:
             port: 9001
