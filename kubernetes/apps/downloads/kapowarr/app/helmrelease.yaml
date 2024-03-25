@@ -43,6 +43,7 @@ spec:
     service:
       main:
         controller: *app
+        primary: true
         ports:
           http:
             port: 5656
