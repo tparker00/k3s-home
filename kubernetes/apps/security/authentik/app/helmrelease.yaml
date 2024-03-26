@@ -16,8 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   dependsOn:
-    - name: authentik-redis
-      namespace: security
+    - name: dragonfly-operator
+      namespace: database
   values:
     global:
       podAnnotations:
@@ -63,13 +63,15 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: false
+      enabled: true
     geoip:
       enabled: false
     prometheus:
       rules:
         enabled: true
     authentik:
+      redis:
+        host: dragonfly.database.svc.cluster.local
       email:
         from: id@${SECRET_DOMAIN}
         host: smtp.gmail.com

@@ -27,7 +27,7 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: storage
-    - name: redis
+    - name: dragonfly-operator
       namespace: database
   valuesFrom:
     - targetPath: objstoreConfig.config.bucket
@@ -66,11 +66,8 @@ spec:
         type: REDIS
         config:
           addr: >-
-            redis-node-0.redis-headless.database.svc.cluster.local:26379,
-            redis-node-1.redis-headless.database.svc.cluster.local:26379,
-            redis-node-2.redis-headless.database.svc.cluster.local:26379
-          db: 13
-          master_name: redis-master
+            dragonfly.database.svc.cluster.local:6379,
+          db: 2
       ingress:
         enabled: true
         ingressClassName: internal

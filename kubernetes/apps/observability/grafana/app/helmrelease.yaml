@@ -204,20 +204,11 @@ spec:
             url: http://alertmanager.observability.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
-          - name: Redis
-            type: redis-datasource
-            access: proxy
-            url: redis://redis-node-0.redis-headless.database.svc.cluster.local:26379,redis://redis-node-1.redis-headless.database.svc.cluster.local:26379,redis://redis-node-2.redis-headless.database.svc.cluster.local:26379
-            jsonData:
-              client: sentinel
-              sentinelName: redis-master
-              poolSize: 5
-              timeout: 10
-              pingInterval: 0
-              pipelineWindow: 0
-            editable: true
     dashboards:
       data:
+        dragonfly:
+          url: https://raw.githubusercontent.com/dragonflydb/dragonfly/main/tools/local/monitoring/grafana/provisioning/dashboards/dashboard.json
+          datasource: Prometheus
         cloudnative-pg:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
           datasource: Prometheus
