@@ -100,7 +100,7 @@ spec:
       endpoints: &cp
         - 10.10.5.60
         - 10.10.5.61
-        - 10.10.5.62
+        - 10.10.5.67
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate labels provided by k3s
