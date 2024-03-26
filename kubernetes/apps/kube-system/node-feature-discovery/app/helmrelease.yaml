@@ -28,7 +28,7 @@ spec:
           effect: NoSchedule
       config:
         core:
-          sources: ["custom", "pci", "usb"]
+          sources: ["cpu", "custom", "pci", "usb"]
         sources:
           usb:
             deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
