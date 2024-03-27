@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/plex
-              tag: 1.40.1.8227-c0dd5a73e
+              tag: 1.40.0.7998-c29d4c0c8
             env:
               TZ: ${TIMEZONE}
             probes:
