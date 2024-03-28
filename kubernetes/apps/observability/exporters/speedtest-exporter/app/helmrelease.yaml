@@ -43,13 +43,14 @@ spec:
                 memory: 50Mi
               limits:
                 memory: 100Mi
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR
-                  operator: DoesNotExist
+        pod:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR
+                        operator: DoesNotExist
     service:
       metrics:
         enabled: true
