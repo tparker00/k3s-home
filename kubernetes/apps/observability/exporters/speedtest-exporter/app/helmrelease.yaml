@@ -49,9 +49,7 @@ spec:
           nodeSelectorTerms:
             - matchExpressions:
                 - key: feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR
-                  operator: NotIn
-                  values:
-                    - "true"
+                  operator: DoesNotExist
     service:
       metrics:
         enabled: true
