@@ -19,9 +19,11 @@ route:
       matchers:
         - alertname != "InfoInhibitor"
         - alertname != "Watchdog"
+        - alertname != "BootstrapRateLimitRisk"
     - receiver: pushover
       continue: true
       matchers:
+        - alertname != "Watchdog"
         - severity = "critical"
 inhibit_rules:
   - equal: ["alertname", "namespace"]
