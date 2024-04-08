@@ -32,8 +32,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/sabnzbd
-              tag: "4.2.3"
+              repository: ghcr.io/tparker00/sabnzbd
+              tag: 4.2.3@sha256:a60ff443a3b9c1eeb49f7bac1aca2f8307b0e970bcdbb4606a6e1b80dc7c04ca
             env:
               TZ: ${TIMEZONE}
               SABNZBD__PORT: &port 8080

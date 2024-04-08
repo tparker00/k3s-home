@@ -33,8 +33,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/qbittorrent
-              tag: 4.6.4@sha256:85f185207a81ec03e84b8302db06f1694c533c99e0efdb2acf0316d554d332e3
+              repository: ghcr.io/tparker00/qbittorrent
+              tag: 4.6.4@sha256:0953ff10a3d7a119d1b51e4a3a666991c4bd6ad5d50848240345b27c2e08f8e0
             env:
               TZ: ${TIMEZONE}
               QBITTORRENT__PORT: &port 8080
