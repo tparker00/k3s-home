@@ -31,8 +31,8 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16
+              repository: ghcr.io/tparker00/postgres-init
+              tag: 16.2@sha256:d366b3d2a1e1ffca914fe3f68f9beca9f21b37263b7e82e38c0e83a132461e0c
             envFrom: &envFrom
             - secretRef:
                 name: gatus-secret
