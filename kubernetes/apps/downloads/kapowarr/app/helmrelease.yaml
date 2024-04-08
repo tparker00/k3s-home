@@ -30,8 +30,8 @@ spec:
         containers:
           main:
             image:
-              repository: mrcas/kapowarr
-              tag: v1.0.0-beta-4
+              repository: ghcr.io/tparker00/kapowarr
+              tag: de9f73aff774a1c667298fa8e7fcebc448cc5d8d
             env:
               TZ: ${TIMEZONE}
             resources:
