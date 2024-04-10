@@ -71,7 +71,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
-        hostname: &host thanos-query-frontend.devbu.io
+        hostname: &host thanos-query-frontend.${SECRET_DOMAIN}
         tls: true
         extraTls:
           - hosts:
