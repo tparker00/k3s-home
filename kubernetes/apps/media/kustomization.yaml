@@ -9,7 +9,6 @@ resources:
   - ./jellyseerr/ks.yaml
   - ./kavita/ks.yaml
   - ./komga/ks.yaml
-  # - ./overseerr/ks.yaml
   - ./plex/ks.yaml
   - ./stash/ks.yaml
   - ./tautulli/ks.yaml
