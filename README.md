@@ -115,10 +115,12 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 | Service                                         | Use                                                               | Cost           |
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
 | [Bitwarden](https://bitwarden.com/)             | Secrets with [External Secrets](https://external-secrets.io/)     | Free           |
+| [Cloudflare](https://cloudflare.com/)           | DNS and Tunnel hosting                                            | Free           |
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
 | [Namecheap](https://namecheap.com/)             | Domain registration                                               | $45/yr         |
 | [Proton](https://proton.com/)                   | Email hosting                                                     | $120/yr        |
 | [Pushover](https://pushover.net/)               | Kubernetes Alerts and application notifications                   | $5 OTP         |
+| [Slack](https://slack.com/)                     | Chat                                                              | Free           |
 |                                                 |                                                                   | Total: ~$15/mo |
 
 ---
