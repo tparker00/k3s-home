@@ -91,6 +91,14 @@ spec:
       extraFlags:
         - --compact.concurrency=4
         - --delete-delay=30m
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+          ephemeral-storage: 10Gi
+        limits:
+          memory: 1Gi
+          ephemeral-storage: 10Gi
       retentionResolutionRaw: 14d
       retentionResolution5m: 30d
       retentionResolution1h: 60d
