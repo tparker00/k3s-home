@@ -32,8 +32,8 @@ spec:
         containers:
           main:
             image:
-              repository: kizaing/kavita
-              tag: 0.7.8@sha256:48b3c2c07f90feb4641ddb791f96a1bf6e70a2b27da8c8b2ca0cc2c627b91d72
+              repository: ghcr.io/kareadita/kavita
+              tag: 0.8.0@sha256:bd163e1051da7d2d64b52485bca1f35860340766bde7a19d2adf226ab2e680c0
             env:
               TZ: ${TIMEZONE}
             resources:
