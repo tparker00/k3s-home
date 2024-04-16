@@ -93,8 +93,8 @@ spec:
               PORT_FORWARDED: "/tmp/gluetun/forwarded_port"
           reannounce:
             image:
-              repository: ghcr.io/buroa/qbittools
-              tag: v0.11.0
+              repository: ghcr.io/buroa/qbtools
+              tag: v0.15.1
             args: ["reannounce", "-s", "localhost", "-p", "8080"]
     pod:
       affinity:
