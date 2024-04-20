@@ -15,6 +15,14 @@ spec:
         name: authentik-charts
         namespace: flux-system
       interval: 5m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
   dependsOn:
     - name: dragonfly-operator
       namespace: database
@@ -22,20 +30,15 @@ spec:
     global:
       podAnnotations:
         secret.reloader.stakater.com/reload: authentik-secrets
+      deploymentStrategy:
+        type: RollingUpdate
       envFrom:
         - secretRef:
             name: authentik-secrets
     server:
-      initContainers:
-        init-db:
-          image:
-            repository: ghcr.io/tparker00/postgres-init
-            tag: 16.2@sha256:d366b3d2a1e1ffca914fe3f68f9beca9f21b37263b7e82e38c0e83a132461e0c
-          imagePullPolicy: IfNotPresent
-      deploymentStrategy:
-        type: RollingUpdate
       autoscaling:
         enabled: true
+        minReplicas: 2
       metrics:
         serviceMonitor:
           enabled: true
@@ -62,12 +65,6 @@ spec:
         type: RollingUpdate
       autoscaling:
         enabled: true
-    postgresql:
-      enabled: false
-    redis:
-      enabled: false
-    geoip:
-      enabled: false
     prometheus:
       rules:
         enabled: true
@@ -79,5 +76,3 @@ spec:
         host: smtp.gmail.com
         port: 465
         use_ssl: true
-      outposts:
-        docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
