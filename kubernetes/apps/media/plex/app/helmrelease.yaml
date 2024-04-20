@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/tparker00/plex
-              tag: 1.40.2.8395-c67dce28e
+              tag: 1.40.1.8227-c0dd5a73e
             env:
               TZ: ${TIMEZONE}
             probes:
