@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 6.3.2
+      version: 6.3.3
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -27,32 +27,8 @@ spec:
   dependsOn:
   - name: local-path-provisioner
     namespace: storage
-  valuesFrom:
-  - targetPath: loki.storage.bucketNames.chunks
-    kind: Secret
-    name: loki-secret
-    valuesKey: BUCKET_NAME
-  - targetPath: loki.storage.bucketNames.ruler
-    kind: Secret
-    name: loki-secret
-    valuesKey: BUCKET_NAME
-  - targetPath: loki.storage.bucketNames.admin
-    kind: Secret
-    name: loki-secret
-    valuesKey: BUCKET_NAME
-  - targetPath: loki.storage.s3.endpoint
-    kind: Secret
-    name: loki-secret
-    valuesKey: BUCKET_HOST
-  - targetPath: loki.storage.s3.accessKeyId
-    kind: Secret
-    name: loki-secret
-    valuesKey: AWS_ACCESS_KEY_ID
-  - targetPath: loki.storage.s3.secretAccessKey
-    kind: Secret
-    name: loki-secret
-    valuesKey: AWS_SECRET_ACCESS_KEY
   values:
+    deploymentMode: SimpleScalable
     loki:
       ingester:
         chunk_encoding: snappy
@@ -91,7 +67,7 @@ spec:
             enabled: true
           split_queries_by_interval: 1h
         compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
+          working_directory: /var/loki/compactor/retention
           shared_store: s3
           compaction_interval: 10m
           retention_enabled: true
@@ -110,38 +86,13 @@ spec:
             local:
               directory: /rules
           rule_path: /tmp/scratch
-          ring:
-            kvstore:
-              store: memberlist
         analytics:
           reporting_enabled: false
-
-        common:
-          path_prefix: /var/loki
-          replication_factor: 2
-          storage:
-            s3:
-              s3: null
-              insecure: true
-              s3forcepathstyle: true
-          ring:
-            kvstore:
-              store: memberlist
-        distributor:
-          ring:
-            kvstore:
-              store: memberlist
-        ingester:
-          max_chunk_age: 1h
-          lifecycler:
-            ring:
-              kvstore:
-                store: memberlist
+      podAnnotations:
+        secret.reloader.stakater.com/reload: loki-secret
 
     gateway:
       replicas: 3
-      image:
-        registry: ghcr.io
       ingress:
         enabled: true
         ingressClassName: internal
@@ -198,3 +149,28 @@ spec:
       enabled: false
     test:
       enabled: false
+  valuesFrom:
+  - targetPath: loki.storage.bucketNames.chunks
+    kind: Secret
+    name: loki-secret
+    valuesKey: BUCKET_NAME
+  - targetPath: loki.storage.bucketNames.ruler
+    kind: Secret
+    name: loki-secret
+    valuesKey: BUCKET_NAME
+  - targetPath: loki.storage.bucketNames.admin
+    kind: Secret
+    name: loki-secret
+    valuesKey: BUCKET_NAME
+  - targetPath: loki.storage.s3.endpoint
+    kind: Secret
+    name: loki-secret
+    valuesKey: BUCKET_HOST
+  - targetPath: loki.storage.s3.accessKeyId
+    kind: Secret
+    name: loki-secret
+    valuesKey: AWS_ACCESS_KEY_ID
+  - targetPath: loki.storage.s3.secretAccessKey
+    kind: Secret
+    name: loki-secret
+    valuesKey: AWS_SECRET_ACCESS_KEY
