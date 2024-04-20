@@ -32,7 +32,7 @@ spec:
     loki:
       ingester:
         chunk_encoding: snappy
-      schema_config:
+      schemaConfig:
         configs:
           - from: "2024-04-20"
             store: tsdb
