@@ -52,8 +52,6 @@ spec:
           log_level: info
           http_listen_port: 3100
           grpc_listen_port: 9095
-        memberlist:
-          join_members: ["loki-memberlist"]
         limits_config:
           ingestion_rate_mb: 64
           ingestion_burst_size_mb: 256
@@ -76,6 +74,7 @@ spec:
         query_scheduler:
           max_outstanding_requests_per_tenant: 4096
         frontend:
+          query_stats_enabled: true
           max_outstanding_per_tenant: 4096
         ruler:
           enable_api: true
