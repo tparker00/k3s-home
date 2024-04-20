@@ -44,7 +44,7 @@ spec:
             nameOverride: *app
             image:
               repository: ghcr.io/tparker00/prowlarr-develop
-              tag: 1.16.1.4420@sha256:a4ebbe075641e61a410f9c1099c9bd943af8b01ecdce7d3f8b2e2e15a9fb0cc7
+              tag: 1.16.2.4435@sha256:7fae77e3a3482dc0d56acef74518717d38420f9211d96c5808879792851613f1
             env:
               TZ: ${TIMEZONE}
               PROWLARR__INSTANCE_NAME: Prowlarr
