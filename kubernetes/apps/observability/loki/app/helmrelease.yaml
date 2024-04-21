@@ -134,18 +134,6 @@ spec:
           name: loki-alerting-rules
       - name: scratch
         emptyDir: {}
-    monitoring:
-      dashboards:
-        annotations:
-          grafana_folder: Loki
-      serviceMonitor:
-        enabled: true
-        metricsInstance:
-          enabled: true
-      selfMonitoring:
-        enabled: false
-        grafanaAgent:
-          installOperator: false
     lokiCanary:
       enabled: false
     test:
