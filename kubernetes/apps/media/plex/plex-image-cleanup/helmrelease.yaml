@@ -69,15 +69,6 @@ spec:
                           - plex
                   topologyKey: kubernetes.io/hostname
           enableServiceLinks: false
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
     persistence:
       config:
         enabled: true
