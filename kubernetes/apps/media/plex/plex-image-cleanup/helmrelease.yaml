@@ -74,12 +74,12 @@ spec:
         enabled: true
         type: emptyDir
         advancedMounts:
-          main:
-            main:
+          plex-image-cleanup:
+            app:
               - path: /config
       plex-config:
         existingClaim: plex
         advancedMounts:
-          main:
-            main:
+          plex-image-cleanup:
+            app:
               - path: /data/plex_config
