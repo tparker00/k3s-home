@@ -99,7 +99,7 @@ spec:
       enabled: true
       endpoints: &cp
         - 10.10.5.61
-        - 10.10.5.64
+        - 10.10.5.62
         - 10.10.5.67
       serviceMonitor:
         metricRelabelings:
