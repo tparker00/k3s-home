@@ -33,7 +33,7 @@ spec:
     cleanupOnFail: true
   values:
     config:
-      lokiAddress: http://loki:3100/loki/api/v1/push
+      lokiAddress: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
       snippets:
         extraScrapeConfigs: |
           - job_name: syslog
@@ -72,6 +72,19 @@ spec:
                 target_label: 'unit'
               - source_labels: ['__journal__hostname']
                 target_label: 'hostname'
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
     extraPorts:
       syslog:
         name: syslog
@@ -80,7 +93,6 @@ spec:
           type: LoadBalancer
           externalIPs:
           - "${LB_V4_PROMTAIL}"
-        externalTrafficPolicy: Local
     extraVolumes:
       - name: journal
         hostPath:
@@ -89,5 +101,10 @@ spec:
       - name: journal
         mountPath: /var/log/journal
         readOnly: true
+    tolerations:
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"
     serviceMonitor:
       enabled: true
