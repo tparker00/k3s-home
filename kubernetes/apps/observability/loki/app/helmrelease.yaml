@@ -28,6 +28,9 @@ spec:
   - name: local-path-provisioner
     namespace: storage
   values:
+    image:
+      repository: grafana/loki
+      tag: 3.0.0
     deploymentMode: SimpleScalable
     loki:
       ingester:

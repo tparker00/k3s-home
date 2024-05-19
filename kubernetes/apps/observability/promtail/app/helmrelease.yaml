@@ -31,7 +31,12 @@ spec:
     timeout: 10m
     recreate: true
     cleanupOnFail: true
+  dependsOn:
+    - name: loki
   values:
+    image:
+      repository: grafana/promtail
+      tag: 3.0.0
     config:
       lokiAddress: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
       snippets:
@@ -106,5 +111,9 @@ spec:
         operator: "Equal"
         value: "arm64"
         effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
+      - effect: NoExecute
+        operator: Exists
     serviceMonitor:
       enabled: true
