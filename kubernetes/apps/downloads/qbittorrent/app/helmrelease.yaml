@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: ghcr.io/tparker00/qbittorrent
-              tag: 4.6.4@sha256:0953ff10a3d7a119d1b51e4a3a666991c4bd6ad5d50848240345b27c2e08f8e0
+              tag: 4.6.5@sha256:ef4acb7efa80641c82ef7f0dbe0ac6a065942760925635d2927bf4218b032433
             env:
               TZ: ${TIMEZONE}
               QBITTORRENT__PORT: &port 8080
