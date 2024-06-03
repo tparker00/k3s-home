@@ -50,7 +50,7 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 256M
+                memory: 1Gi
           metrics:
             image:
               repository: ghcr.io/onedr0p/exportarr
