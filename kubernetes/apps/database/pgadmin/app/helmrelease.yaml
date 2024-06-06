@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: registry.samipsolutions.fi/docker/dpage/pgadmin4
-              tag: 8.6
+              tag: 8.8
             envFrom:
               - secretRef:
                   name: pgadmin-secret
