@@ -22,7 +22,7 @@ spec:
       retries: 3
   values:
     controllers:
-      bitwarden-secrets-manager:
+      bws-cache:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
