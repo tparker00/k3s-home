@@ -150,6 +150,6 @@ spec:
         existingClaim: *app
       data:
         enabled: true
-        existingClaim: data-rw
+        existingClaim: downloads-rw
         globalMounts:
           - path: /data
