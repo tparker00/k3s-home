@@ -89,7 +89,6 @@ spec:
             readOnly: true
       nas-backups:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_POSTGRES:=temp}
+        existingClaim: postgres-backups-rw
         globalMounts:
           - path: /backups

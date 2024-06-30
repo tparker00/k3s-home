@@ -45,6 +45,5 @@ spec:
           restartPolicy: OnFailure
           volumes:
             - name: nas-backups
-              hostPath:
-                path: ${SECRET_MFS_POSTGRES:=temp}
-                type: Directory
+              persistentVolumeClaim:
+                claimName: postgres-backups-rw

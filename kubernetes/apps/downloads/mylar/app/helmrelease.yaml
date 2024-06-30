@@ -94,13 +94,11 @@ spec:
         existingClaim: *app
       comics:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_COMICS:=temp}
+        existingClaim: books-rw
         globalMounts:
           - path: /data
       downloads:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DOWNLOADS:=temp2}
+        existingClaim: sabnzbd-downloads-rw
         globalMounts:
           - path: /downloads
