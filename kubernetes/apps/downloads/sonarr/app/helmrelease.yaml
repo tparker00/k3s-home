@@ -150,7 +150,6 @@ spec:
         existingClaim: *app
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: data-rw
         globalMounts:
           - path: /data

@@ -72,7 +72,6 @@ spec:
           - path: /app/db
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_COMICS:=temp}
+        existingClaim: downloads-rw
         globalMounts:
           - path: /data

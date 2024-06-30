@@ -84,9 +84,6 @@ spec:
           - path: /root/.stash
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_STASH:=temp}
-        globalMounts:
-          - path: /data
+        existingClaim: stash-rw
       cache:
         type: emptyDir

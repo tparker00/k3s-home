@@ -150,7 +150,6 @@ spec:
           - path: /config
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: downloads-rw
         globalMounts:
           - path: /data

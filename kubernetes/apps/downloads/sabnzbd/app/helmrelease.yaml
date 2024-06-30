@@ -153,8 +153,7 @@ spec:
         existingClaim: *app
       downloads:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DOWNLOADS:=temp}
+        existingClaim: sabnzbd-downloads-rw
         globalMounts:
           - path: /downloads
       incomplete:

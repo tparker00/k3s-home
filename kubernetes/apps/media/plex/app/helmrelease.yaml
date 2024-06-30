@@ -112,17 +112,13 @@ spec:
         existingClaim: *app
       tv-data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: tv-ro
         globalMounts:
           - path: /mnt/tv
-            subPath: tv
       movie-data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: movies-ro
         globalMounts:
           - path: /mnt/movies
-            subPath: movies
       transcode:
         type: emptyDir
