@@ -93,8 +93,6 @@ spec:
               - path: /kavita/config
       media:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: books-ro
         globalMounts:
           - path: /data
-            subPath: books
