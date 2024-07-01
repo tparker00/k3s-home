@@ -78,7 +78,6 @@ spec:
         existingClaim: *app
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_DATA:=temp}
+        existingClaim: downloads-ro
         globalMounts:
           - path: /data

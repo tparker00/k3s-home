@@ -116,7 +116,6 @@ spec:
     persistence:
       data:
         enabled: true
-        type: hostPath
-        hostPath: ${SECRET_MFS_MINIO:=temp}
+        existingClaim: minio-rw
         globalMounts:
           - path: /data
