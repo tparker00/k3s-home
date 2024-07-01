@@ -112,11 +112,13 @@ spec:
         existingClaim: *app
       tv-data:
         enabled: true
+        readOnly: true
         existingClaim: tv-ro
         globalMounts:
           - path: /mnt/tv
       movie-data:
         enabled: true
+        readOnly: true
         existingClaim: movies-ro
         globalMounts:
           - path: /mnt/movies

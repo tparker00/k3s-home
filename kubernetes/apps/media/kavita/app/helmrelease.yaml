@@ -93,6 +93,7 @@ spec:
               - path: /kavita/config
       media:
         enabled: true
+        readOnly: true
         existingClaim: books-ro
         globalMounts:
           - path: /data
