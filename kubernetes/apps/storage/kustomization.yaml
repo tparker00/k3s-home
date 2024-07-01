@@ -7,3 +7,4 @@ resources:
   - ./minio/ks.yaml
   - ./restic/ks.yaml
   - ./local-path-provisioner/ks.yaml
+  - ./mounts/ks.yaml
