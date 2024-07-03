@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/cronjob-batch-v1.json
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -45,5 +46,5 @@ spec:
           restartPolicy: OnFailure
           volumes:
             - name: nas-backups
-              PersistentVolumeClaim:
-                claimname: postgres-backups-rw
+              persistentVolumeClaim:
+                claimName: postgres-backups-rw
