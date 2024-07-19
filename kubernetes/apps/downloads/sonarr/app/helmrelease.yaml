@@ -45,7 +45,7 @@ spec:
             nameOverride: *app
             image:
               repository: ghcr.io/tparker00/sonarr
-              tag: 4.0.6.1805@sha256:ae6a8ba8533c6403726839dd745cf47f6e5689a3de0e59d0413eba9ff5e388c9
+              tag: 4.0.8.1874@sha256:f4a584215d8ce83c6858c5cfb2b87632c4c6508c8aa7ec466e63508a03c0ade9
             env:
               TZ: ${TIMEZONE}
               SONARR__AUTHENTICATION_METHOD: External
