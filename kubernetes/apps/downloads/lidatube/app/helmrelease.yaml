@@ -83,7 +83,7 @@ spec:
           - path: /lidatube/config
       data:
         enabled: true
-        existingClaim: downloads-rw
+        existingClaim: music-rw
         globalMounts:
           - path: /lidatube/downloads
 
