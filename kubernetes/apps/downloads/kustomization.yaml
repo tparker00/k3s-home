@@ -8,6 +8,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./kapowarr/ks.yaml
   - ./lidarr/ks.yaml
+  - ./lidatube/ks.yaml
   - ./metube/ks.yaml
   - ./mylar/ks.yaml
   - ./prowlarr/ks.yaml
