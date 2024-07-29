@@ -62,14 +62,16 @@ spec:
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_PORT_FORWARDING: "on"
               DOT: "off"
+              FIREWALL_INPUT_PORTS: 3334
             envFrom:
               - secretRef:
                   name: gluetun-secret
             securityContext:
+              runAsUser: 0
+              allowPrivilegeEscalation: true
               capabilities:
                 add:
                   - NET_ADMIN
-                  - SYS_MODULE
         pod:
           securityContext:
             runAsUser: 568
