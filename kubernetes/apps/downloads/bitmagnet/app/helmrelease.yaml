@@ -87,12 +87,12 @@ spec:
         primary: true
         ports:
           http:
-            port: &port 3333
+            port: 3333
     serviceMonitor:
       main:
         enabled: true
         endpoints:
-          - port: *port
+          - port: "3333"
             scheme: http
             path: /metrics
             interval: 1m
