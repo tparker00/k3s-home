@@ -5,7 +5,7 @@ namespace: observability
 configMapGenerator:
   - name: bitmagnet
     files:
-      - https://github.com/bitmagnet-io/bitmagnet/blob/main/observability/grafana-dashboards/bitmagnet.json
+      - bitmagnet.json=https://raw.githubusercontent.com/bitmagnet-io/bitmagnet/main/observability/grafana-dashboards/bitmagnet.json
 
 generatorOptions:
   disableNameSuffixHash: true
