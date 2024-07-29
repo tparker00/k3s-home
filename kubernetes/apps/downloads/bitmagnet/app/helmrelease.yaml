@@ -63,6 +63,7 @@ spec:
               VPN_PORT_FORWARDING: "on"
               DOT: "off"
               FIREWALL_INPUT_PORTS: 3333
+              FIREWALL_VPN_INPUT_PORTS: 3334
             envFrom:
               - secretRef:
                   name: gluetun-secret
