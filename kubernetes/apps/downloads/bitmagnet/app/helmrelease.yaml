@@ -57,19 +57,18 @@ spec:
             dependsOn: main
             image:
               repository: qmcgaw/gluetun
-              tag: pr-2285
+              tag: v3.38.0
             env:
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_PORT_FORWARDING: "on"
               DOT: "off"
-              FIREWALL_INPUT_PORTS: 3334
             envFrom:
               - secretRef:
                   name: gluetun-secret
             securityContext:
               capabilities:
                 add:
-                  - SYS_ADMIN
+                  - NET_ADMIN
         pod:
           securityContext:
             runAsUser: 568
