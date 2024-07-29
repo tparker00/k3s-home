@@ -69,7 +69,7 @@ spec:
             securityContext:
               capabilities:
                 add:
-                  - NET_ADMIN
+                  - SYS_ADMIN
         pod:
           securityContext:
             runAsUser: 568
