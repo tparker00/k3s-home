@@ -88,6 +88,16 @@ spec:
         ports:
           http:
             port: 3333
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 20s
+        serviceName: bitmagnet-metrics
     ingress:
       main:
         enabled: true
@@ -95,7 +105,7 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Downloads
-          gethomepage.dev/name: Bigmagnet
+          gethomepage.dev/name: Bitmagnet
           gethomepage.dev/icon: bitmagnet.png
         hosts:
         - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
