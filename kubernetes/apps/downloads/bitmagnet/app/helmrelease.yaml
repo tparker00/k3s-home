@@ -45,8 +45,7 @@ spec:
             args:
             - worker
             - run
-            - --keys=http_server
-            - --keys=queue_server
+            - --all
             env:
               TZ: ${TIMEZONE}
             envFrom: *envFrom
@@ -54,6 +53,23 @@ spec:
               requests:
                 cpu: 10m
                 memory: 256Mi
+          gluetun:
+            dependsOn: main
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.38.0
+            env:
+              VPN_SERVICE_PROVIDER: protonvpn
+              VPN_PORT_FORWARDING: "on"
+              DOT: "off"
+              FIREWALL_INPUT_PORTS: 3334
+            envFrom:
+              - secretRef:
+                  name: gluetun-secret
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
         pod:
           securityContext:
             runAsUser: 568
