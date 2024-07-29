@@ -64,6 +64,8 @@ spec:
               DOT: "off"
               FIREWALL_INPUT_PORTS: 3333
               FIREWALL_VPN_INPUT_PORTS: 3334
+              FIREWALL_OUTBOUND_SUBNETS: 10.50.0.0/16
+              DNS_KEEP_NAMESERVER: "on"
             envFrom:
               - secretRef:
                   name: gluetun-secret
