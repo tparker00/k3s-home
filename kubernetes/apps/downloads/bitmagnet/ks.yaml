@@ -16,3 +16,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  postBuild:
+    substitute:
+      APP: *app
