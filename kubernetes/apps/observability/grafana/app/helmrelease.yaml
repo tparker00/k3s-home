@@ -225,10 +225,6 @@ spec:
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
           datasource: Loki
-      downloads:
-        bitmagnet:
-          url: https://github.com/bitmagnet-io/bitmagnet/blob/main/observability/grafana-dashboards/bitmagnet.json
-          datasource: Prometheus
       kubernetes:
         kubernetes-api-server:
           # renovate: depName="Kubernetes / System / API Server"
