@@ -62,7 +62,7 @@ spec:
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_PORT_FORWARDING: "on"
               DOT: "off"
-              FIREWALL_INPUT_PORTS: 3334
+              FIREWALL_INPUT_PORTS: 3333
             envFrom:
               - secretRef:
                   name: gluetun-secret
