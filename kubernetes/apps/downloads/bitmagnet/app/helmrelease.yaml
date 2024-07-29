@@ -56,8 +56,8 @@ spec:
           gluetun:
             dependsOn: main
             image:
-              repository: ghcr.io/qdm12/gluetun
-              tag: v3.38.0
+              repository: qmcgaw/gluetun
+              tag: pr-2285
             env:
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_PORT_FORWARDING: "on"
@@ -69,7 +69,7 @@ spec:
             securityContext:
               capabilities:
                 add:
-                  - SYS_ADMIN
+                  - NET_ADMIN
         pod:
           securityContext:
             runAsUser: 568
