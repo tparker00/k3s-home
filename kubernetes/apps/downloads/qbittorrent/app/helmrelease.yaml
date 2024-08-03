@@ -32,6 +32,7 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
+            dependsOn: gluetun
             image:
               repository: ghcr.io/tparker00/qbittorrent
               tag: 4.6.5@sha256:ef4acb7efa80641c82ef7f0dbe0ac6a065942760925635d2927bf4218b032433
@@ -66,7 +67,6 @@ spec:
               limits:
                 memory: 16Gi
           gluetun:
-            dependsOn: main
             image:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.38.0
