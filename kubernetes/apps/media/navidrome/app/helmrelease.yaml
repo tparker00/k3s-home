@@ -102,4 +102,4 @@ spec:
       media:
         existingClaim: music-ro
         globalMounts:
-          - path: /media
+          - path: /music
