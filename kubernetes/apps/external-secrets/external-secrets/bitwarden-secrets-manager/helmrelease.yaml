@@ -29,37 +29,16 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/ripplefcl/bws-cache
-              tag: v1.1.0
+              repository: ghcr.io/tparker00/bws-cache
+              tag: v0.1.0
             env:
-              SECRET_TTL: 3600
-              DEBUG: "false"
-              ORG_ID:
+              BWS_CACHE_SECRET_TTL: 15m
+              BWS_CACHE_LOG_LEVEL: "DEBUG"
+              BWS_CACHE_ORG_ID:
                 valueFrom:
                   secretKeyRef:
                     name: bws-secret
                     key: ORG_ID
-            # probes:
-            #   liveness:
-            #     enabled: false
-            # #     custom: false
-            # #     spec:
-            # #       httpGet:
-            # #         path: /heartbeat
-            # #         port: 5000
-            # #       initialDelaySeconds: 15
-            # #       periodSeconds: 30
-            # #       failureThreshold: 3
-            #   readiness:
-            #     enabled: false
-            # #     custom: true
-            # #     spec:
-            # #       httpGet:
-            # #         path: /health
-            # #         port: 5000
-            # #       initialDelaySeconds: 15
-            #   startup:
-            #     enabled: false
             securityContext: &securityContext
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -75,7 +54,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: 5000
+            port: 8080
     ingress:
       app:
         className: internal
