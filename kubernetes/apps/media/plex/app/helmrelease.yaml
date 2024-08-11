@@ -5,15 +5,16 @@ kind: HelmRelease
 metadata:
   name: &app plex
 spec:
-  interval: 30m
+  interval: 5m
   chart:
     spec:
       chart: app-template
-      version: 3.0.4
+      version: 3.3.2
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+      interval: 5m
   maxHistory: 2
   install:
     remediation:
@@ -27,37 +28,12 @@ spec:
   values:
     controllers:
       plex:
+        strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
-        containers:
-          main:
-            image:
-              repository: ghcr.io/tparker00/plex
-              tag: 1.40.4.8679-424562606
-            env:
-              TZ: ${TIMEZONE}
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /identity
-                    port: 32400
-                  initialDelaySeconds: 10
-                  periodSeconds: 15
-                  timeoutSeconds: 1
-                  failureThreshold: 5
-              readiness: *probes
-            resources:
-              requests:
-                cpu: 100m
-                memory: 8G
-                gpu.intel.com/i915: 1
-              limits:
-                memory: 16G
-                gpu.intel.com/i915: 1
         pod:
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
           securityContext:
             runAsUser: 568
             runAsGroup: 568
@@ -65,26 +41,46 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [44, 105, 10000]
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: intel.feature.node.kubernetes.io/gpu
-                  operator: In
-                  values:
-                    - "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/tparker00/plex
+              tag: 1.40.1.8227-c0dd5a73e
+            env:
+              TZ: ${TIMEZONE}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 1000m
+                memory: 8G
+                gpu.intel.com/i915: 1
+              limits:
+                memory: 16G
+                gpu.intel.com/i915: 1
     service:
-      main:
+      app:
         controller: *app
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${SVC_PLEX_ADDR}
         ports:
           http:
-            port: 32400
+            port: &port 32400
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -122,5 +118,7 @@ spec:
         globalMounts:
           - path: /mnt/movies
             readOnly: true
+      tmp:
+        type: emptyDir
       transcode:
         type: emptyDir
