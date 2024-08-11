@@ -57,6 +57,9 @@ spec:
                 enabled: true
               readiness:
                 enabled: true
+                spec:
+                  failureThreshold: 60
+                  periodSeconds: 60
               startup:
                 enabled: true
                 spec:
