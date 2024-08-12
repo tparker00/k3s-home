@@ -41,7 +41,7 @@ spec:
                     key: ORG_ID
             securityContext: &securityContext
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
             resources: &resources
               requests:
