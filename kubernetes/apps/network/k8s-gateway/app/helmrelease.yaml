@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: k8s-gateway
@@ -20,8 +20,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
@@ -30,5 +28,6 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-        io.cilium/lb-ipam-ips: "10.10.5.6"
+        io.cilium/lb-ipam-ips: "10.10.5.12"
       externalTrafficPolicy: Cluster
+    watchedResources: ["Ingress", "Service"]

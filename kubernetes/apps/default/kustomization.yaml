@@ -4,10 +4,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
-  - ./additional-ingress/ks.yaml
-  - ./clusterpolicies/ks.yaml
-  - ./languagetool/ks.yaml
-  - ./homepage/ks.yaml
+  #- ./additional-ingress/ks.yaml
+  #- ./clusterpolicies/ks.yaml
+  #- ./languagetool/ks.yaml
+  #- ./homepage/ks.yaml
   - ./namespace.yaml
-  - ./rxresume/ks.yaml
-  - ./theme-park/ks.yaml
+  #- ./rxresume/ks.yaml
+  #- ./theme-park/ks.yaml
