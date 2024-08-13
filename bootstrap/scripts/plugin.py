@@ -6,7 +6,6 @@ from typing import Any
 
 from typing import Any
 from netaddr import IPNetwork
-from bcrypt import hashpw, gensalt
 
 import makejinja
 import validation
